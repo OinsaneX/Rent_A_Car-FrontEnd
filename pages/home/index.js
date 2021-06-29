@@ -5,8 +5,7 @@ export default function index() {
     <>
       <NavBar/>
       <main>
-          <h3>Rente ahora!
-          </h3>
+          <h3>Rente ahora!</h3>
           <h5>...y consiga el mejor precio</h5>
         
         <section>
@@ -72,23 +71,26 @@ export default function index() {
       h3{
         color: #09f;
         margin:0;
-    font-family: 'TodayShop-Ultra';
+        margin-top:10px;
     font-size: 4em;
     line-height: .7em;
     cursor: default;
       }
      section{
       padding:20px 20px;
-      width:70%;
+      width:80%;
       background-color: #eee;
-      border-radius: 30px;
+      border-radius: 10px;
+      box-shadow: 5px 4px #0009;
      }
      .form{
        display:flex;
+       justify-content:center;
        align-items: center;
        align-content: center;
        flex-wrap: wrap;
      }
+    
      .search{
        display:flex;
        flex-direction: row-reverse;
@@ -96,7 +98,6 @@ export default function index() {
      }
       h5{
         color: #000;
-    font-family: 'TodayShop-Bold';
     font-size: 1.42em;
     line-height: 2vw;
     cursor: default;
@@ -166,6 +167,10 @@ export default function index() {
         }
         input{
           margin:5px 6px;
+          padding:10px 48px;
+        border-radius:5px;
+        border:none;
+        margin-top:10px;
         }
         @media only screen and (max-width: 800px) {
           .search{
@@ -174,9 +179,7 @@ export default function index() {
        align-items: center;
        align-content: center;
      }
-     .inp{
-          width:90%;
-        }
+    
     
                   }
                 
