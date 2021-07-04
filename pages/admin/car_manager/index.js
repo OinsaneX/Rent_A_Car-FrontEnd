@@ -55,7 +55,8 @@ export default function Add_Car() {
                            <img src={car.imageUrl} alt="" />
                            <span>{car.price_per_day} $ Por dia</span>
                            <div className="buttons">
-                               <button><p>Actualizar datos</p></button>
+                               <Link href={`/admin/car_manager/add_car/${car._id}`}>
+                               <button><p>Actualizar datos</p></button></Link>
                                <button onClick={(e)=>deleteCar(car._id)}><p>Borrar</p></button>
                            </div>
 

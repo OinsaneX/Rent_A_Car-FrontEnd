@@ -1,10 +1,16 @@
 import Link from "next/link";
+import { useState } from "react";
 import User from '../svgs/icons/User'
 export default function NavBar() {
+
+  const [despl, setdespl] = useState(false)
+
+  const changeDespl = ()=>{
+    setdespl(!despl)
+  }
     return (
         <nav>
         <section>
-          <img src="/imgs/logo.png" alt="" width="80"/>
           <h3> Rent_A_Car</h3>
         </section>
         <section>
@@ -14,12 +20,21 @@ export default function NavBar() {
           <Link href="/home">
             <a>Contact</a>
           </Link>
-          <label htmlFor="useraccount">
+          <div className="center" onClick={()=>changeDespl()}>
+         
             <User/>
-          </label>
-          <Link href="/home">
-            <a id="useraccount" className="cont">Mi cuenta</a>
-          </Link>
+         
+          
+            <p id="useraccount" className="cont" >Mi cuenta</p>
+          </div>
+          
+          {
+            despl &&  <ul>
+						<li><Link href="/login"><a>Login</a></Link></li>
+						<li><Link href="/register"><a>Register</a></Link></li>
+				
+							</ul>
+          }
          
         </section>
 
@@ -28,11 +43,30 @@ export default function NavBar() {
         img{
             border-radius:999px;
         }
+        ul {
+          display:block;
+          position:absolute;
+          min-width:140px;
+          background-color:#0009;
+          padding:10px 25px;
+          right:0px;
+          top:85px;
+          margin:0;
+          margin-right:5px;
+          border-radius:6px;
+          list-style:none;
+        }
+       
+     
+        
         h3{
           margin-left:10px;
             color:#fff;
             font-style:italic;
             cursor:default;
+        }
+        li{
+          
         }
           nav {
             background-color: #0009;
@@ -43,6 +77,9 @@ export default function NavBar() {
           .cont{
             margin:0;
             margin-right:10px;
+            font-size: 20px;
+            font-style: italic;
+            color:#fff;
           }
           a {
             margin: 0px 15px;
@@ -54,9 +91,21 @@ export default function NavBar() {
           a:hover{
               text-decoration:underline;
           }
+          .center{
+            display: flex;
+            align-items: center;
+          }
           section {
             display: flex;
             align-items: center;
+          }
+          p{
+            display:none;
+          }
+
+          @media only screen and (min-width: 1000px) {
+            p{
+display:inline}
           }
           `}
         </style>

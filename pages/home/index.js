@@ -1,6 +1,26 @@
+import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
 export default function index() {
+
+  const [carList, setcarList] = useState([])
+
+
+  useEffect(() => {
+    getCars()
+  }, [])
+
+
+  const getCars = async()=>{
+    await axios.get("https://desolate-sea-14156.herokuapp.com/car")
+    .then((res)=>{
+      setcarList(res.data)
+
+    })
+    
+  }
+
   return (
     <>
       <NavBar/>
@@ -25,7 +45,7 @@ export default function index() {
         <span>
           Fecha de recogida :
         </span>
-        <input type="date" />
+        <input type="date"/>
         </div>
         <div className="inp">
         <span>
@@ -34,7 +54,7 @@ export default function index() {
         <input type="date" />
         </div>
         <div className="inp">
-        <label for="cars">Hora de recogida :</label>
+        <label htmlFor="cars">Hora de recogida :</label>
 
         <select name="dater" id="cars">
   <option value="volvo"></option>
@@ -46,22 +66,29 @@ export default function index() {
         </div>
         <div className="search">
         <button>
-          Buscar
+          <p>Buscar</p>
         </button>
         </div>
        
         </section>
+        <h4>
+          Autos disponibles en la empresa :
+        </h4>
        <div className="list">
-         <div className="card">
-         <img src="imgs/Cars/Cytroen.png" width="250" height="200"/>
-          
-          <div className="lab">
-          <span className="block">Hyundai i10 o similar</span>
-          <span  className="block">4x4</span>
-          <span className="block">Precio por dia a partir de ...</span>
-          <p className="price">$ 86</p>
-          </div>
-         </div>
+        {carList.length==0 ?
+         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+        :  carList.map(car=>(
+           <div className="card">
+           <img src={car.imageUrl} width="300" height="200"/>
+            
+            <div className="lab">
+            <span className="block">{car.brand + car.model}</span>
+            <span  className="block">4x4</span>
+            <span className="block">Precio por dia a partir de ...</span>
+            <p className="price">$ {car.price_per_day}</p>
+            </div>
+           </div>
+        ))}
        
         
        </div>
@@ -78,10 +105,11 @@ export default function index() {
       }
      section{
       padding:20px 20px;
-      width:80%;
-      background-color: #eee;
+      width:80vw;
+      background-color: #fff;
       border-radius: 10px;
-      box-shadow: 5px 4px #0009;
+      border:1px solid #eee;
+      box-shadow: 0 1px #0004;
      }
      .form{
        display:flex;
@@ -104,10 +132,12 @@ export default function index() {
     margin:0;
     margin-bottom:10px;
       }
+
+   
       select{
-        padding:10px 48px;
+        padding:10px 80px;
         border-radius:5px;
-        border:none;
+        border:1px solid #eee;
         margin-top:10px;
 
       }
@@ -115,7 +145,10 @@ export default function index() {
         position:absolute;
         bottom:0;
         width:100%;
-        background-color: #eee;
+        background-color: #000;
+        color:#fff;
+        border-radius:10px;
+        padding:10px 10px;
       }
         .card{
           position:relative;
@@ -124,6 +157,11 @@ export default function index() {
           margin:12px 12px;
         }
         p{
+          text-align:center;
+          margin:0;
+          font-size:18px;
+        }
+        label,span{
           text-align:center;
         }
         .list{
@@ -134,7 +172,8 @@ export default function index() {
 
         }
         .inp{
-          width:50%;
+          width:240px;
+          margin:10px 20px;
         }
         .price{
           position: absolute;
@@ -146,14 +185,16 @@ export default function index() {
           font-size:22px;
         }
         button{
-          background-color:#0009;
-          padding: 20px 30px;
-          border-radius:8px;
+          background-color:#000;
+          padding: 15px 25px;
+          margin:0;
+          border-radius:4px;
           border:none;
           color:#fff;
         }
         img{
           margin:30px 30px;
+          padding-bottom:40px;
         }
         .block{
           display:block;
@@ -169,9 +210,10 @@ export default function index() {
           margin:5px 6px;
           padding:10px 48px;
         border-radius:5px;
-        border:none;
+        border:1px solid #eee;
         margin-top:10px;
         }
+        
         @media only screen and (max-width: 800px) {
           .search{
        display:flex;

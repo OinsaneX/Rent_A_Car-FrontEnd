@@ -1,12 +1,25 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import "react-notifications/lib/notifications.css";
 
 import { NotificationManager,NotificationContainer } from 'react-notifications';
 import AdminNav from '../../../../components/AdminNav'
-export default function AddCar() {
+export default function AddCar({id}) {
 
-    const [carData, setcarData] = useState({brand:'',model:'',description:'',imageUrl:'',price_per_day:0,ports:0,type:'Normal',transmission:'Manual',capacity:0,air:null})
+
+    useEffect(() => {
+        getData()
+        
+    }, [])
+
+    const getData = async () => {
+        await axios.get(`https://desolate-sea-14156.herokuapp.com/car/${id}`)
+        .then((response) => {
+            setcarData(response.data)
+        })
+    }
+
+    const [carData, setcarData] = useState({brand:'',model:'',description:'',imageUrl:'',price_per_day:0,ports:0,type:'Normal',transmission:'Manual',capacity:0,air:true})
     const [loading, setloading] = useState(null)
 
 
@@ -40,13 +53,13 @@ export default function AddCar() {
           
       }
       const resetData =()=>{
-          setcarData({brand:'',model:'',description:'',imageUrl:'',price_per_day:0})
+          setcarData({brand:'',model:'',description:'',imageUrl:'',price_per_day:0,ports:0,type:'Normal',transmission:'Manual',capacity:0,air:null})
       }
 
       const addNewCar = async() => {
           console.log(carData)
 
-          await axios.post("https://desolate-sea-14156.herokuapp.com/car",carData)
+          await axios.put(`https://desolate-sea-14156.herokuapp.com/car/${id}`,carData)
           .then(response=> {
             resetData()  
             NotificationManager.success("Se ha añadido el auto al sistema","Éxito",2000)
@@ -120,9 +133,9 @@ export default function AddCar() {
                                 Aire Acondicionado
                             </h5>
                             <div className="flex">
-                            <input type="radio" name="air" value={true} onChange={(e)=>onWrite(e)}/>
+                            <input type="radio" name="air"  value={true} onChange={(e)=>onWrite(e)}/>
                             <p >Si</p>
-                            <input type="radio" name="air" value={false} onChange={(e)=>onWrite(e)}/>
+                            <input type="radio" name="air"  value={false} onChange={(e)=>onWrite(e)}/>
                             <p >No</p>
                             </div>
                         </div>
@@ -306,5 +319,16 @@ label {
             `}</style>
         </div>
     );
+}
+
+export const getServerSideProps = async (ctx) => {
+
+    const {id} = ctx.query
+
+    return {
+        props:{
+            id
+        }
+    }
 }
 
