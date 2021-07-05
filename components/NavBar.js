@@ -66,10 +66,10 @@ export default function NavBar() {
             cursor:default;
         }
         li{
-          
+      
         }
           nav {
-            background-color: #0009;
+            background-color: #000;
             height: 80px;
             display: flex;
             justify-content: space-between;
@@ -101,6 +101,7 @@ export default function NavBar() {
           }
           p{
             display:none;
+            cursor:default;
           }
 
           @media only screen and (min-width: 1000px) {

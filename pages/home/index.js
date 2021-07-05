@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar";
 export default function index() {
 
   const [carList, setcarList] = useState([])
-
+  const [rentData, setrentData] = useState({location:null,pickUp:null,dropOff:null,hour:null})
 
   useEffect(() => {
     getCars()
@@ -21,6 +21,15 @@ export default function index() {
     
   }
 
+  const onchangeSelect = (e) => {
+   setrentData({...rentData, [e.target.name]: e.target.value})
+  }
+
+const searchCars = async()=>{
+  await axios.post("https://desolate-sea-14156.herokuapp.com/rent/searchAvailable",rentData)
+  .then(response=>console.log(response.data))
+}
+
   return (
     <>
       <NavBar/>
@@ -32,40 +41,65 @@ export default function index() {
         <h4>Renta de autos Cuba :</h4>
         <div className="form">
         <div className="inp">
-        <label for="cars">Lugar de recogida :</label>
+        <label htmlFor="cars">Lugar de recogida :</label>
 
-<select name="cars" id="cars">
-  <option value="volvo"></option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
+<select name="location" onChange={(e)=> onchangeSelect(e)}>
+  <option value=""></option>
+  <option value="Camaguey Aeropuerto">Camaguey Aeropuerto</option>
+  <option value="Artemisa">Artemisa</option>
+  <option value="Baracoa Airport">Baracoa Airport</option>
+  <option value="Camaguey">Camaguey</option>
+  <option value="Havana">Havana</option>
+  <option value="Havana Aeopuerto Terminal 2">Havana Aeopuerto Terminal 2</option>
+  <option value="Havana AeropuertoTerminal 3">Havana AeropuertoTerminal 3</option>
 </select>
         </div>
         <div className="inp">
         <span>
           Fecha de recogida :
         </span>
-        <input type="date"/>
+        <input type="date" name="pickUp" onChange={(e)=> onchangeSelect(e)}/>
         </div>
         <div className="inp">
         <span>
          Fecha de entrega :
         </span>
-        <input type="date" />
+        <input type="date" name="dropOff" onChange={(e)=> onchangeSelect(e)}/>
         </div>
         <div className="inp">
         <label htmlFor="cars">Hora de recogida :</label>
 
-        <select name="dater" id="cars">
-  <option value="volvo"></option>
-  <option value="saab">10:00 AM</option>
-  <option value="mercedes">12:00PM</option>
-  <option value="audi">18:00PM</option>
+        <select name="hour" onChange={(e)=>onchangeSelect(e)}>
+  <option value={null}></option>
+  <option value="0:00">12:00 AM</option>
+  <option value="1:00">1:00 AM</option>
+  <option value="2:00">2:00 AM</option>
+  <option value="3:00">3:00 AM</option>
+  <option value="4:00">4:00 AM</option>
+  <option value="5:00">5:00 AM</option>
+  <option value="6:00">6:00 AM</option>
+  <option value="7:00">7:00 AM</option>
+  <option value="8:00">8:00 AM</option>
+  <option value="9:00">9:00 AM</option>
+  <option value="10:00">10:00 AM</option>
+  <option value="11:00">11:00 AM</option>
+  <option value="12:00">12:00 PM</option>
+  <option value="13:00">1:00 PM</option>
+  <option value="14:00">2:00 PM</option>
+  <option value="15:00">3:00 PM</option>
+  <option value="16:00">4:00 PM</option>
+  <option value="17:00">5:00 PM</option>
+  <option value="18:00">6:00 PM</option>
+  <option value="19:00">7:00 PM</option>
+  <option value="20:00">8:00 PM</option>
+  <option value="21:00">9:00 PM</option>
+  <option value="22:00">10:00 PM</option>
+  <option value="23:00">11:00 PM</option>
 </select>
         </div>
         </div>
         <div className="search">
-        <button>
+        <button onClick={()=>searchCars()}>
           <p>Buscar</p>
         </button>
         </div>
@@ -78,8 +112,8 @@ export default function index() {
         {carList.length==0 ?
          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         :  carList.map(car=>(
-           <div className="card">
-           <img src={car.imageUrl} width="300" height="200"/>
+           <div className="card" key={car._id}>
+           <img src={car.imageUrl} width="270" height="180"/>
             
             <div className="lab">
             <span className="block">{car.brand + car.model}</span>
@@ -96,7 +130,7 @@ export default function index() {
 
       <style jsx>{`
       h3{
-        color: #09f;
+        color: red;
         margin:0;
         margin-top:10px;
     font-size: 4em;
@@ -135,7 +169,8 @@ export default function index() {
 
    
       select{
-        padding:10px 80px;
+        padding:10px 0px;
+        width: 248px;
         border-radius:5px;
         border:1px solid #eee;
         margin-top:10px;
@@ -145,9 +180,9 @@ export default function index() {
         position:absolute;
         bottom:0;
         width:100%;
-        background-color: #000;
+        background-color: #0008;
         color:#fff;
-        border-radius:10px;
+        border-radius:0 0 10px 10px;
         padding:10px 10px;
       }
         .card{
@@ -155,6 +190,7 @@ export default function index() {
           border:1px solid #eee;
           border-radius:10px;
           margin:12px 12px;
+          box-shadow: 0px 4px #eee;
         }
         p{
           text-align:center;
@@ -166,6 +202,7 @@ export default function index() {
         }
         .list{
           display:flex;
+          margin:0 ;
           align-content:center;
           flex-wrap:wrap;
           justify-content:center;
@@ -193,8 +230,8 @@ export default function index() {
           color:#fff;
         }
         img{
-          margin:30px 30px;
-          padding-bottom:40px;
+          margin:30px 10px;
+          padding-bottom:10px;
         }
         .block{
           display:block;
@@ -225,9 +262,12 @@ export default function index() {
     
                   }
                 
-                  @media only screen and (max-width: 1200px) {
+                  @media only screen and (min-width: 1200px) {
                     section{
        width:90%;
+     }
+     .list{
+      margin:0 5%;
      }
                   }
       `}</style>

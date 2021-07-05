@@ -51,7 +51,7 @@ export default function Add_Car() {
                 <section>
                     {listCar.map((car) =>(
                         <div key={car._id} className="card">
-                           <h3>{car.brand + car.model}</h3>
+                           <h3>{`${car.brand} ${car.model}`}</h3>
                            <img src={car.imageUrl} alt="" />
                            <span>{car.price_per_day} $ Por dia</span>
                            <div className="buttons">
