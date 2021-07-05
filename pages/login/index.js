@@ -1,27 +1,38 @@
 import Link from "next/link";
 import "react-notifications/lib/notifications.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import LoginImage from '../../svgs/img/Login'
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import axios from "axios";
+import {useUser} from '../../hooks/UserContext'
 
 export default function Home() {
+  const {user,getUser} = useUser();
   const router = useRouter();
   const [form, setform] = useState({
-    name: "",
+    username: "",
     password: "",
   });
   const [loading, setloading] = useState(false);
+
+
+  useEffect(() => {
+   getUser(()=>{
+     router.replace("/home")
+   })
+    
+  }, [])
 
   const onChangeInput = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = () => {
-    if (form.name == "") {
+  const onSubmit = async () => {
+    if (form.username == "") {
       NotificationManager.error(
         "Introduzca un nombre de usuario",
         "Error",
@@ -31,9 +42,27 @@ export default function Home() {
       NotificationManager.error("Introduzca la contrasenha", "Error", 3000);
     } else {
       setloading(true);
-      setTimeout(() => {
-        router.replace("/admin/car_manager");
-      }, 2500);
+        await axios.post("https://desolate-sea-14156.herokuapp.com/user/login",form)
+        .then(async response => {
+          if(response.data){
+            await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
+            .then(res => {
+              localStorage.setItem("token",res.data.token)
+              router.replace("/home");
+            })
+          }
+          else{
+            setloading(false);
+
+            NotificationManager.error(
+              "No existe ninguna cuenta con esos datos",
+              "Error",
+              3000
+            );
+          }
+        })
+
+       
     }
   };
   return (
@@ -47,7 +76,7 @@ export default function Home() {
             <input
               type="text"
               placeholder="Usuario"
-              name="name"
+              name="username"
               onChange={(e) => onChangeInput(e)}
             />
             <input
@@ -63,6 +92,9 @@ export default function Home() {
 
           <Link href="/register">
             <a>Crear Cuenta ...</a>
+          </Link>
+          <Link href="/home">
+            <a>Continuar sin cuenta ...</a>
           </Link>
         </main>
       </div>

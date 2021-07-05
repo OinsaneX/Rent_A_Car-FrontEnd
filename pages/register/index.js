@@ -8,18 +8,22 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Home() {
   const router = useRouter();
   const [form, setform] = useState({
     name: "",
-    email: "",
-    cpf: "",
+    username:"",
+    identity: "",
+    nacionality: "",
     phone: "",
-    pass: "",
+    password: "",
     conf: "",
+    address:"",
+    country: "",
   });
-  const onSubmit = (e) => {
+  const onSubmit = async(e) => {
     e.preventDefault();
     if (form.name == "") {
       NotificationManager.error(
@@ -29,7 +33,7 @@ export default function Home() {
       );
     } else if (form.email.indexOf("@") == -1) {
       NotificationManager.error("Introduzca un email válido", "Error", 3000);
-    } else if (countDigits(form.cpf) < 11) {
+    } else if (countDigits(form.identity) < 11) {
       NotificationManager.error("Introduzca un CI válido", "Error", 3000);
     } else if (countDigits(form.phone) < 8) {
       NotificationManager.error(
@@ -37,13 +41,41 @@ export default function Home() {
         "Error",
         3000
       );
-    } else if (form.pass != form.conf) {
+    } else if (form.password != form.conf) {
       NotificationManager.error("La contraseña no coincide", "Error", 3000);
-    } else {
-      NotificationManager.success("Su cuenta fue creada", "Sucesso", 3000);
-      setTimeout(() => {
-        router.replace("/login");
-      }, 1500);
+    }
+    else if (form.nacionality == "") {
+      NotificationManager.error(
+        "Introduzca su nacionalidad",
+        "Error",
+        3000
+      )}
+    else if (form.country == "") {
+      NotificationManager.error(
+        "Introduzca su pais de residencia",
+        "Error",
+        3000
+      )}
+      else if (form.address == "") {
+        NotificationManager.error(
+          "Introduzca su direccion",
+          "Error",
+          3000
+        )}
+    else {
+        await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
+        .then(response=>{
+          NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
+          setTimeout(()=>{
+            router.replace("/login");
+          },2000
+           
+          )
+        })
+     
+     
+       
+     
     }
   };
 
@@ -59,7 +91,6 @@ export default function Home() {
 
   const onChangeInput = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
-    console.log();
   };
   return (
     <>
@@ -82,8 +113,8 @@ export default function Home() {
             <section>
               <p>Usuario :</p>
               <input
-                name="name"
-                value={form.name}
+                name="username"
+                value={form.username}
                 onChange={(e) => onChangeInput(e)}
                 type="text"
                 placeholder="Ej. Jorgito99"
@@ -103,8 +134,8 @@ export default function Home() {
               <p>CI :</p>
               <InputMask
                 mask="99999999999"
-                name="cpf"
-                value={form.cpf}
+                name="identity"
+                value={form.identity}
                 onChange={(e) => onChangeInput(e)}
                 placeholder="XXXXXXXXXXX"
               />
@@ -122,8 +153,8 @@ export default function Home() {
             <section>
               <p>Contraseña :</p>
               <input
-                name="pass"
-                value={form.pass}
+                name="password"
+                value={form.password}
                 onChange={(e) => onChangeInput(e)}
                 type="password"
                 placeholder="Contraseña"
@@ -137,6 +168,36 @@ export default function Home() {
                 onChange={(e) => onChangeInput(e)}
                 type="password"
                 placeholder="Confirmar Contraseña"
+              />
+            </section>
+            <section>
+              <p>Nacionalidad :</p>
+              <input
+                name="nacionality"
+                value={form.nacionality}
+                onChange={(e) => onChangeInput(e)}
+                type="password"
+                placeholder="Nacionalidad"
+              />
+            </section>
+            <section>
+              <p>Pais :</p>
+              <input
+                name="country"
+                value={form.country}
+                onChange={(e) => onChangeInput(e)}
+                type="password"
+                placeholder="Pais"
+              />
+            </section>
+            <section>
+              <p>Direccion :</p>
+              <input
+                name="address"
+                value={form.address}
+                onChange={(e) => onChangeInput(e)}
+                type="password"
+                placeholder="Direccion"
               />
             </section>
             <button onClick={(e) => onSubmit(e)}>Registrar</button>
@@ -157,7 +218,7 @@ export default function Home() {
         }
         a {
           margin-top: 10px;
-          color: #09f;
+          color: #000;
         }
 
         div {
@@ -189,8 +250,9 @@ export default function Home() {
         }
         button {
           padding: 14px 20px;
-          background-color: white;
-          border: 1px solid #09f;
+          background-color: #000;
+          color: #fff;
+          border: 1px solid #eee;
           border-radius: 5px;
           margin-top: 20px;
           transition: all ease-in 0.7s;

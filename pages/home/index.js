@@ -2,10 +2,14 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
+import {useUser} from '../../hooks/UserContext'
+
+
 export default function index() {
 
   const [carList, setcarList] = useState([])
   const [rentData, setrentData] = useState({location:null,pickUp:null,dropOff:null,hour:null})
+  const {user} = useUser()
 
   useEffect(() => {
     getCars()
@@ -26,8 +30,9 @@ export default function index() {
   }
 
 const searchCars = async()=>{
-  await axios.post("https://desolate-sea-14156.herokuapp.com/rent/searchAvailable",rentData)
-  .then(response=>console.log(response.data))
+console.log(user)
+ /* await axios.post("https://desolate-sea-14156.herokuapp.com/rent/searchAvailable",rentData)
+  .then(response=>console.log(response.data))*/
 }
 
   return (
