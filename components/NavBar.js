@@ -34,11 +34,11 @@ export default function NavBar() {
           <h3> Rent_A_Car</h3>
         </section>
         <section>
-          <Link href="/home">
+          <Link href="/offerts">
             <a className="margin">Ofertas</a>
           </Link>
           <Link href="/home">
-            <a className="margin">Contact</a>
+            <a className="margin">Rentar</a>
           </Link>
           <div className="center" onClick={()=>changeDespl()}>
          

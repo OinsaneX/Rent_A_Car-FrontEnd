@@ -30,14 +30,15 @@ export default function Home() {
         }
         a {
           padding: 14px 20px;
-          background-color: white;
-          border: 1px solid #09f;
+          background-color: #000;
+          color: #fff;
+          border: 1px solid #eee;
           border-radius: 5px;
           margin-top: 20px;
           transition: all ease-in 0.7s;
         }
         a:hover {
-          background-color: #09f;
+          background-color: #0009;
         }
         div {
           display: grid;

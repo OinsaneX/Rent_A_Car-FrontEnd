@@ -109,8 +109,8 @@ export default function Home() {
         }
         a {
           margin-top: 10px;
-          color: #09f;
-          border-bottom:1px solid #09f;
+          color: #000;
+          border-bottom:1px solid #eee;
         }
         .spinner {
           margin-top: 5px;
@@ -158,14 +158,15 @@ export default function Home() {
         }
         button {
           padding: 14px 20px;
-          background-color: white;
-          border: 1px solid #09f;
+          color:#fff;
+          background-color: #000;
+          border: 1px solid #eee;
           border-radius: 5px;
           margin-top: 20px;
           transition: all ease-in 0.7s;
         }
         button:hover {
-          background-color: #09f;
+          background-color: #0009;
         }
       `}</style>
     </>

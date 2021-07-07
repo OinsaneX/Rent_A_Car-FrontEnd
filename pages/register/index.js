@@ -15,6 +15,7 @@ export default function Home() {
   const [form, setform] = useState({
     name: "",
     username:"",
+    email:"",
     identity: "",
     nacionality: "",
     phone: "",
@@ -64,7 +65,12 @@ export default function Home() {
         )}
     else {
         await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
-        .then(response=>{
+        .then(async response=>{
+          await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
+            email:form.email,
+            asunto:"Bienvenido a Rent_A_Car Cuba",
+            mensaje:"No responda a este correo"
+          })
           NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
           setTimeout(()=>{
             router.replace("/login");
@@ -258,7 +264,7 @@ export default function Home() {
           transition: all ease-in 0.7s;
         }
         button:hover {
-          background-color: #09f;
+          background-color: #0009;
         }
         section {
           display: flex;

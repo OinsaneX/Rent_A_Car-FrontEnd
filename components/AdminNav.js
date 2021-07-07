@@ -11,6 +11,11 @@ export default function AdminNav() {
                     Autos
                 </a>
             </Link>
+            <Link href="/admin/user/manager">
+                <a className="link">
+                    Usuarios
+                </a>
+            </Link>
             <Link href="/">
                 <a className="link">
                     Registro
