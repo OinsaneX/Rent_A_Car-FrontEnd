@@ -67,6 +67,7 @@ export default function Home() {
         await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
         .then(async response=>{
           await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
+            username: form.username,
             email:form.email,
             asunto:"Bienvenido a Rent_A_Car Cuba",
             mensaje:"No responda a este correo"
