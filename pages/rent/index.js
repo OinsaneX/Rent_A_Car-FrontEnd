@@ -1,14 +1,16 @@
 import axios from "axios";
 import Link from "next/link";
+import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
 import {useUser} from '../../hooks/UserContext'
 
 
 export default function index() {
-
+  const router = useRouter();
+  const [loading, setloading] = useState(false)
   const [carList, setcarList] = useState([])
-  const [rentData, setrentData] = useState({location:null,pickUp:null,dropOff:null,hour:null})
+  const [rentData, setrentData] = useState({location:null,pickUp:null,dropOff:null,pickHour:null,dropHour:null})
   const {user} = useUser()
 
   useEffect(() => {
@@ -26,19 +28,25 @@ export default function index() {
   }
 
   const onchangeSelect = (e) => {
+    console.log(e.target.name ,e.target.value)
    setrentData({...rentData, [e.target.name]: e.target.value})
   }
 
-const searchCars = async()=>{
-console.log(user)
- /* await axios.post("https://desolate-sea-14156.herokuapp.com/rent/searchAvailable",rentData)
-  .then(response=>console.log(response.data))*/
-}
+
+
+ const onSubmit =async ()=>{
+   setloading(true)
+   await axios.post("http://desolate-sea-14156.herokuapp.com/rent",rentData)
+   .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
+   .catch(error=>setloading(false))
+ }
 
   return (
     <>
       <NavBar/>
       <main>
+     {loading &&  <div className="loader"></div>}
+
           <h3>Rente ahora!</h3>
           <h5>...y consiga el mejor precio</h5>
         
@@ -74,37 +82,68 @@ console.log(user)
         <div className="inp">
         <label htmlFor="cars">Hora de recogida :</label>
 
-        <select name="hour" onChange={(e)=>onchangeSelect(e)}>
+        <select name="pickHour" onChange={(e)=>onchangeSelect(e)}>
   <option value={null}></option>
-  <option value="0:00">12:00 AM</option>
-  <option value="1:00">1:00 AM</option>
-  <option value="2:00">2:00 AM</option>
-  <option value="3:00">3:00 AM</option>
-  <option value="4:00">4:00 AM</option>
-  <option value="5:00">5:00 AM</option>
-  <option value="6:00">6:00 AM</option>
-  <option value="7:00">7:00 AM</option>
-  <option value="8:00">8:00 AM</option>
-  <option value="9:00">9:00 AM</option>
-  <option value="10:00">10:00 AM</option>
-  <option value="11:00">11:00 AM</option>
-  <option value="12:00">12:00 PM</option>
-  <option value="13:00">1:00 PM</option>
-  <option value="14:00">2:00 PM</option>
-  <option value="15:00">3:00 PM</option>
-  <option value="16:00">4:00 PM</option>
-  <option value="17:00">5:00 PM</option>
-  <option value="18:00">6:00 PM</option>
-  <option value="19:00">7:00 PM</option>
-  <option value="20:00">8:00 PM</option>
-  <option value="21:00">9:00 PM</option>
-  <option value="22:00">10:00 PM</option>
-  <option value="23:00">11:00 PM</option>
+  <option value="0">12 AM</option>
+  <option value="1">1 AM</option>
+  <option value="2">2 AM</option>
+  <option value="3">3 AM</option>
+  <option value="4">4 AM</option>
+  <option value="5">5 AM</option>
+  <option value="6">6 AM</option>
+  <option value="7">7 AM</option>
+  <option value="8">8 AM</option>
+  <option value="9">9 AM</option>
+  <option value="10">10 AM</option>
+  <option value="11">11 AM</option>
+  <option value="12">12 PM</option>
+  <option value="13">1 PM</option>
+  <option value="14">2 PM</option>
+  <option value="15">3 PM</option>
+  <option value="16">4 PM</option>
+  <option value="17">5 PM</option>
+  <option value="18">6 PM</option>
+  <option value="19">7 PM</option>
+  <option value="20">8 PM</option>
+  <option value="21">9 PM</option>
+  <option value="22">10 PM</option>
+  <option value="23">11 PM</option>
+</select>
+        </div>
+        <div className="inp">
+        <label htmlFor="cars">Hora de entrega :</label>
+
+        <select name="dropHour" onChange={(e)=>onchangeSelect(e)}>
+  <option value={null}></option>
+  <option value="0">12 AM</option>
+  <option value="1">1 AM</option>
+  <option value="2">2 AM</option>
+  <option value="3">3 AM</option>
+  <option value="4">4 AM</option>
+  <option value="5">5 AM</option>
+  <option value="6">6 AM</option>
+  <option value="7">7 AM</option>
+  <option value="8">8 AM</option>
+  <option value="9">9 AM</option>
+  <option value="10">10 AM</option>
+  <option value="11">11 AM</option>
+  <option value="12">12 PM</option>
+  <option value="13">1 PM</option>
+  <option value="14">2 PM</option>
+  <option value="15">3 PM</option>
+  <option value="16">4 PM</option>
+  <option value="17">5 PM</option>
+  <option value="18">6 PM</option>
+  <option value="19">7 PM</option>
+  <option value="20">8 PM</option>
+  <option value="21">9 PM</option>
+  <option value="22">10 PM</option>
+  <option value="23">11 PM</option>
 </select>
         </div>
         </div>
         <div className="search">
-        <button onClick={()=>searchCars()}>
+        <button onClick={()=>onSubmit()}>
           <p>Buscar</p>
         </button>
         </div>
@@ -142,6 +181,16 @@ console.log(user)
     line-height: .7em;
     cursor: default;
       }
+      .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('imgs/load.gif') 50% 50% no-repeat rgb(249,249,249);
+        opacity: .8;
+    }
      section{
       padding:20px 20px;
       width:80vw;

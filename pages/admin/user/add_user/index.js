@@ -28,6 +28,72 @@ export default function Add_User() {
         setform({ ...form, [e.target.name]: e.target.value });
       };
 
+      const onSubmit = async(e) => {
+        e.preventDefault();
+        if (form.name == "") {
+          NotificationManager.error(
+            "Introduzca el nombre de usuario",
+            "Error",
+            3000
+          );
+        } else if (form.email.indexOf("@") == -1) {
+          NotificationManager.error("Introduzca un email válido", "Error", 3000);
+        } else if (countDigits(form.identity) < 11) {
+          NotificationManager.error("Introduzca un CI válido", "Error", 3000);
+        } else if (countDigits(form.phone) < 8) {
+          NotificationManager.error(
+            "Introduzca un Número de celular válido",
+            "Error",
+            3000
+          );
+        } else if (form.password != form.conf) {
+          NotificationManager.error("La contraseña no coincide", "Error", 3000);
+        }
+        else if (form.nacionality == "") {
+          NotificationManager.error(
+            "Introduzca su nacionalidad",
+            "Error",
+            3000
+          )}
+        else if (form.country == "") {
+          NotificationManager.error(
+            "Introduzca su pais de residencia",
+            "Error",
+            3000
+          )}
+          else if (form.address == "") {
+            NotificationManager.error(
+              "Introduzca su direccion",
+              "Error",
+              3000
+            )}
+        else {
+            await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
+            .then(response=>{
+              NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
+              setTimeout(()=>{
+                router.replace("/login");
+              },2000
+               
+              )
+            })
+         
+         
+           
+         
+        }
+      };
+    
+      function countDigits(str) {
+        var acu = 0;
+    
+        Array.prototype.forEach.call(str, function (val) {
+          acu += val.charCodeAt(0) > 47 && val.charCodeAt(0) < 58 ? 1 : 0;
+        });
+    
+        return acu;
+      }
+
     return (
         <>
         <div>
