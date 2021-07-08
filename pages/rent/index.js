@@ -299,8 +299,8 @@ export default function index() {
         }
         input{
           margin:5px 6px;
-          padding:10px 58px;
-        border-radius:5px;
+          width:248px;
+          border-radius:5px;
         border:1px solid #eee;
         margin-top:10px;
         }
