@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
    getUser(()=>{
-     router.replace("/home")
+     router.replace("/rent")
    })
     
   }, [])
@@ -48,7 +48,7 @@ export default function Home() {
             await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
             .then(res => {
               localStorage.setItem("token",res.data.token)
-              router.replace("/home");
+              router.replace("/rent");
             })
           }
           else{
@@ -93,7 +93,7 @@ export default function Home() {
           <Link href="/register">
             <a>Crear Cuenta ...</a>
           </Link>
-          <Link href="/home">
+          <Link href="/rent">
             <a>Continuar sin cuenta ...</a>
           </Link>
         </main>

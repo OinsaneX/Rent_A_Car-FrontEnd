@@ -10,7 +10,7 @@ export default function Home() {
             Somos una empresa dedicada al alquiler de automoviles pot todo el
             pais
           </h4>
-          <Link href="/home">
+          <Link href="/rent">
             <a>Entrar</a>
           </Link>
         </main>
