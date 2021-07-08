@@ -36,7 +36,7 @@ export default function index() {
 
  const onSubmit =async ()=>{
    setloading(true)
-   await axios.post("http://desolate-sea-14156.herokuapp.com/rent",rentData)
+   await axios.post("https://desolate-sea-14156.herokuapp.com/rent",rentData)
    .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
    .catch(error=>setloading(false))
  }
