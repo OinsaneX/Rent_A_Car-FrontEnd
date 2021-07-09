@@ -59,12 +59,12 @@ export default function UserManager({users}) {
     
 {userList.map((user)=>(
                         user.role=="admin" && <tr key={user._id}>
-                            <td><p>{user.name}</p></td>
-                         <td><p>{user.username}</p></td>
-                         <td><p>{user.email}</p></td>
-                         <td><p>{user.identity}</p></td>
-                         <td><p>{user.country}</p></td>
-                         <td className="flex"><label onClick={()=>deleteUser(user._id)}><Delete/></label> <label><Edit/></label></td>
+                            <td data-col-title="Nombre"><p>{user.name}</p></td>
+                         <td data-col-title="Usuario"><p>{user.username}</p></td>
+                         <td data-col-title="Email"><p>{user.email}</p></td>
+                         <td data-col-title="CI"><p>{user.identity}</p></td>
+                         <td data-col-title="Pais"><p>{user.country}</p></td>
+                         <td data-col-title="Opciones" className="flex"><label onClick={()=>deleteUser(user._id)}><Delete/></label> <label><Edit/></label></td>
                          </tr>
                     ))}
 </tbody>
@@ -87,17 +87,19 @@ export default function UserManager({users}) {
                         <th><p>Email</p></th>
                         <th><p>CI</p></th>
                         <th><p>Pais</p></th>
+                        <th><p>Opciones</p></th>
+
                     </tr>
                     </thead>
                    <tbody>
                    {userList.map((user)=>(
                         user.role=="client" && <tr key={user._id}>
-                            <td><p>{user.name}</p></td>
-                         <td><p>{user.username}</p></td>
-                         <td><p>{user.email}</p></td>
-                         <td><p>{user.identity}</p></td>
-                         <td><p>{user.country}</p></td>
-                         <td className="flex"><label onClick={()=>deleteUser(user._id)}><Delete/></label> <label><Edit/></label></td>
+                            <td data-col-title="Nombre"><p>{user.name}</p></td>
+                         <td data-col-title="Usuario"><p>{user.username}</p></td>
+                         <td data-col-title="Email"><p>{user.email}</p></td>
+                         <td data-col-title="CI"><p>{user.identity}</p></td>
+                         <td data-col-title="Pais"><p>{user.country}</p></td>
+                         <td data-col-title="Opciones" className="flex"><label onClick={()=>deleteUser(user._id)}><Delete/></label> <label><Edit/></label></td>
 
                          </tr>
                     ))}
@@ -116,6 +118,7 @@ export default function UserManager({users}) {
                     place-items:center;
                     display: grid;
                 }
+              
                 a{
                     background-color: #000;
                     color:#fff;
@@ -123,6 +126,10 @@ export default function UserManager({users}) {
                     padding:10px 12px;
                     border-radius:5px;
                     margin:10px 5px;
+                }
+                thead{
+                    background-color: #000;
+                    color:#fff;
                 }
                 h3{
                     margin:0;
@@ -136,7 +143,7 @@ export default function UserManager({users}) {
                     cursor:pointer;
                 }
                 p{
-                    padding:10 0px;
+                    padding:10px 0px;
                     margin:0;
                     text-align: center;
 
@@ -160,6 +167,42 @@ export default function UserManager({users}) {
                       color:#000;
                       width:90vw;
                       margin:20px 20px;
+                  }
+
+                  @media screen and (max-width:630px){
+                      .title{
+                          text-align:left;
+                      }
+                      table{
+                        width:98vw;
+                    }
+                      thead{
+                          display:none;
+                      }
+                   
+                      tr,td{
+                          display:block;
+                      }
+                      tr:not(:last-child){
+                          border-bottom: 5px solid #000;
+                      }
+                      td{
+                          padding-left: 26%;
+                          position:relative;
+                      }
+
+                      td::before{
+                          position :absolute;
+                          padding:5px;
+                          left:0;
+                          top:0;
+                          bottom:0;
+                          width:22%;
+                          color:#fff;
+                          content:attr(data-col-title);
+                          font-weight:bold;
+                          background-color: #5E5E5E;
+                      }
                   }
                 `}
             </style>

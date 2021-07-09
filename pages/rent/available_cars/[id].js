@@ -51,6 +51,10 @@ export default function AvailableCars({listCar,days,id}) {
                 text-align: center;
                 margin-top:0;
             }
+            .btn{
+                text-align: center;
+            }
+          
             section{
                 margin:10px 10px;
                 border: 1px solid #eee;
@@ -66,8 +70,13 @@ export default function AvailableCars({listCar,days,id}) {
                 color: #fff;
                 border-radius: 5px;
                 border:none;
-                margin:0;
+                margin:5px 6px;
                 padding:20px 30px;
+                transition:all ease-in 0.6s;
+            }
+            button:hover{
+                background-color: #0009;
+
             }
             img{
                 width:200px
@@ -75,6 +84,14 @@ export default function AvailableCars({listCar,days,id}) {
             .grid{
                 display:grid;
                 place-content:center;
+            }
+            @media only screen and (min-width: 800px) {
+                section{
+                    flex-direction: row;
+               
+                }
+
+            
             }
             `} </style>
         </div>

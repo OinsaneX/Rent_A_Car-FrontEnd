@@ -21,11 +21,7 @@ export default function AdminNav() {
                     Registro
                 </a>
             </Link>
-            <Link href="/">
-                <a className="link">
-                    Mensajes
-                </a>
-            </Link>
+        
         </div>
         <style jsx>
             {`
