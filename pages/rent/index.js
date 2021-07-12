@@ -4,13 +4,21 @@ import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
 import {useUser} from '../../hooks/UserContext'
+import "react-notifications/lib/notifications.css";
 
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 export default function index() {
+  const hoursArray = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"]
+  const today = `${new Date().getFullYear()}-${String(new Date().getMonth()).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`
+
   const router = useRouter();
   const [loading, setloading] = useState(false)
   const [carList, setcarList] = useState([])
-  const [rentData, setrentData] = useState({location:null,pickUp:null,dropOff:null,pickHour:null,dropHour:null})
+  const [rentData, setrentData] = useState({location:null,pickUp:today,dropOff:today,pickHour:null,dropHour:null})
   const {user} = useUser()
 
   useEffect(() => {
@@ -35,14 +43,46 @@ export default function index() {
 
 
  const onSubmit =async ()=>{
-   setloading(true)
-   await axios.post("https://desolate-sea-14156.herokuapp.com/rent",rentData)
-   .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
-   .catch(error=>setloading(false))
+   if(!rentData.location){
+    NotificationManager.error(
+    "Introduzca el lugar de Recogida",
+    "Error",
+    2000
+   )
+   }
+   else if(!rentData.pickHour){
+    NotificationManager.error(
+    "Introduzca la hora de Recogida",
+    "Error",
+    2000
+     )
+   }
+   else if(!rentData.dropHour){
+    NotificationManager.error(
+    "Introduzca la hora de Entrega",
+    "Error",
+    2000
+     )
+   }
+   else if((new Date(rentData.dropOff).getTime()-new Date(rentData.pickUp).getTime())/ (1000 * 60 * 60 * 24)<1){
+    NotificationManager.error(
+    "La fecha de entrega debe ser como minimo 1 dia despues de la fecha de recogida",
+    "Error",
+    4000
+     )
+   }
+   else{
+    setloading(true)
+    await axios.post("https://desolate-sea-14156.herokuapp.com/rent",rentData)
+    .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
+    .catch(error=>setloading(false))
+   }
+  
  }
 
   return (
     <>
+    <NotificationContainer/>
       <NavBar/>
       <main>
      {loading &&  <div className="loader"></div>}
@@ -71,43 +111,27 @@ export default function index() {
         <span>
           Fecha de recogida :
         </span>
-        <input type="date" name="pickUp" onChange={(e)=> onchangeSelect(e)}/>
+        <input type="date" value={rentData.pickUp} name="pickUp" min={today} onChange={(e)=> onchangeSelect(e)}/>
         </div>
         <div className="inp">
         <span>
          Fecha de entrega :
         </span>
-        <input type="date" name="dropOff" onChange={(e)=> onchangeSelect(e)}/>
+        <input type="date" value={rentData.dropOff} name="dropOff" min={rentData.pickUp} onChange={(e)=> onchangeSelect(e)}/>
         </div>
         <div className="inp">
         <label htmlFor="cars">Hora de recogida :</label>
 
         <select name="pickHour" onChange={(e)=>onchangeSelect(e)}>
   <option value={null}></option>
-  <option value="0">12 AM</option>
-  <option value="1">1 AM</option>
-  <option value="2">2 AM</option>
-  <option value="3">3 AM</option>
-  <option value="4">4 AM</option>
-  <option value="5">5 AM</option>
-  <option value="6">6 AM</option>
-  <option value="7">7 AM</option>
-  <option value="8">8 AM</option>
-  <option value="9">9 AM</option>
-  <option value="10">10 AM</option>
-  <option value="11">11 AM</option>
-  <option value="12">12 PM</option>
-  <option value="13">1 PM</option>
-  <option value="14">2 PM</option>
-  <option value="15">3 PM</option>
-  <option value="16">4 PM</option>
-  <option value="17">5 PM</option>
-  <option value="18">6 PM</option>
-  <option value="19">7 PM</option>
-  <option value="20">8 PM</option>
-  <option value="21">9 PM</option>
-  <option value="22">10 PM</option>
-  <option value="23">11 PM</option>
+  {rentData.pickUp == today ? hoursArray.map(hour=>(
+    new Date().getHours()<hour && <option key={hour} value={hour}>{`${hour}:00 ${hour <12 ? "AM" : "PM"}`}</option>
+   
+  ))
+:hoursArray.map(hour=>(
+  <option key={hour} value={hour}>{`${hour}:00 ${hour <12 ? "AM" : "PM"}`}</option>
+))
+}
 </select>
         </div>
         <div className="inp">
