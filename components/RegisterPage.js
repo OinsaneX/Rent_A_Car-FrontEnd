@@ -28,9 +28,44 @@ export default function PopUpRegister({close}) {
       setform({ ...form, [e.target.name]: e.target.value });
     };
 
+    const onSubmit = async() => {
+      if (form.username == "") {
+        NotificationManager.error(
+          "Introduzca un nombre de usuario",
+          "Error",
+          3000
+        );
+      } else if (form.password == "") {
+        NotificationManager.error("Introduzca la contrasenha", "Error", 3000);
+      } else {
+        setloading(true);
+          await axios.post("https://desolate-sea-14156.herokuapp.com/user/login",form)
+          .then(async response => {
+            if(response.data){
+              await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
+              .then(res => {
+                localStorage.setItem("token",res.data.token)
+                close()
+              })
+            }
+            else{
+              setloading(false);
+  
+              NotificationManager.warning(
+                "No existe ninguna cuenta con esos datos",
+                "Error",
+                3000
+              );
+            }
+          })
+  
+         
+      }
+    }
 
     return (
         <div>
+
          <div className="register">
         <div className="close" onClick={() =>close()}>
            X
@@ -38,7 +73,6 @@ export default function PopUpRegister({close}) {
         <div className="login">
             <h4>Para reservar un auto necesitas estar registrado</h4>
         <main>
-          <NotificationContainer />
           <h2>Inicia sesion</h2>
           <section>
             <input
@@ -201,8 +235,10 @@ export default function PopUpRegister({close}) {
             }
             .close{
                 position:absolute;
-                top:10px;
+                top:40px;
+                color:#000;
                 right:10px;
+                box-shadow: 0px 0px 12px rgba(255, 0, 0,.8);
                 background-color: red;
                 border-radius:999px;
                 padding: 10px 15px;
@@ -272,13 +308,14 @@ export default function PopUpRegister({close}) {
                 padding: 14px 20px;
                 color:#fff;
                 background-color: #000;
-                border: 1px solid #eee;
                 border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(255, 255, 255,1);
                 margin: 10px 0;
+                border:none;
                 transition: all ease-in 0.7s;
               }
               button:hover {
-                background-color: #0009;
+                background-color: #0006;
               }
 
              @media only screen and (min-width: 800px){
@@ -288,6 +325,9 @@ export default function PopUpRegister({close}) {
                 }
                 h4{
                     text-align: center;
+                }
+                main{
+                  height:100vh;
                 }
                 .reg{
                     width:60%;

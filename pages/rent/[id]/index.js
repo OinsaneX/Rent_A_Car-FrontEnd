@@ -60,6 +60,8 @@ export default function Contract({rent,car,user}) {
         border: 3px solid #eee;
         display:flex;
         flex-wrap: wrap;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
     }
     h2{
         margin:0;
@@ -67,11 +69,14 @@ export default function Contract({rent,car,user}) {
     button{
         position:fixed;
         bottom:20px;
+        color:#fff;
         right:20px;
         padding: 30px 30px;
         border-radius:999px;
-        background-color: #16CC51A1;
+        background-color: #000;
         border:0;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
     }
     section{
         display:flex;
@@ -83,21 +88,28 @@ export default function Contract({rent,car,user}) {
 
     }
     .image{
-        width:20%;
-        min-width:300px;
+        display:flex;
+        justify-content:center;
+        width:100%;
     }
     img{
-        max-width:300px;
+        width:300px;
 
     }
-    .flex1{
-        flex:1;
-    }
+ 
     .col{
         display:grid;
         place-items:center;
         place-content:center;
         min-width:300px;
+        text-align:center;
+        flex:1;
+    }
+    @media only screen and (min-width: 940px) {
+    .image{
+        width:20%;
+        min-width:300px;
+    }
     }
 
         `}</style>
@@ -115,7 +127,6 @@ export const getServerSideProps = async (ctx) => {
     var user = null
     await axios.get(`https://desolate-sea-14156.herokuapp.com/rent/${id}`).then(async(res) => {
         rent=res.data
-        console.log(rent)
         await axios.get(`https://desolate-sea-14156.herokuapp.com/user/${res.data.idUser}`)
         .then(async(resUser) => {
             user = resUser.data

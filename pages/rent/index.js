@@ -219,10 +219,9 @@ export default function index() {
       padding:20px 20px;
       width:80vw;
       background-color: #fff;
-      border-radius: 10px;
       border:1px solid #eee;
-      box-shadow: 0 1px #0004;
-     }
+      box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+    }
      .form{
        display:flex;
        justify-content:center;
@@ -260,15 +259,12 @@ export default function index() {
         width:100%;
         background-color: #0008;
         color:#fff;
-        border-radius:0 0 10px 10px;
         padding:10px 10px;
       }
         .card{
+          box-shadow: 0px 0px 10px rgba(0,0,0,.8);
           position:relative;
-          border:1px solid #eee;
-          border-radius:10px;
           margin:12px 12px;
-          box-shadow: 0px 4px #eee;
         }
         p{
           text-align:center;
@@ -300,6 +296,7 @@ export default function index() {
           font-size:22px;
         }
         button{
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
           background-color:#000;
           padding: 15px 25px;
           margin:0;

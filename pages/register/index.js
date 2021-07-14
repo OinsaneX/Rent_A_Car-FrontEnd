@@ -216,12 +216,13 @@ export default function Home() {
       </div>
       <style jsx>{`
         main {
+          
           display: grid;
           place-content: center;
           place-items: center;
-          border: 1px solid #eee;
-          border-radius: 5px;
-          padding: 20px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,.8);
+          padding:20px;
+          margin:10px 0px;
         }
         a {
           margin-top: 10px;
@@ -232,11 +233,12 @@ export default function Home() {
           display: grid;
           place-content: center;
           place-items: center;
-          height: 100vh;
+         
         }
         h2 {
           font-style: italic;
           margin-bottom: 20px;
+
         }
         form {
           display: flex;

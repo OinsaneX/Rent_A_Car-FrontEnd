@@ -104,6 +104,8 @@ export default function NavBar() {
           text-decoration:underline;
       }
           nav {
+            box-shadow: 0px 0px 18px rgba(0, 0, 0,.6);
+
             background-color: #000;
             height: 80px;
             display: flex;

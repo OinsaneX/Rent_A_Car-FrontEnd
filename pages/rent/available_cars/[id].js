@@ -33,7 +33,7 @@ export default function AvailableCars({listCar,data}) {
         <>
        <header onClick={(e) =>removeRent(e)}>
         <BackIcon/>
-        <p>Volver</p>
+        <p>Cancelar</p>
         </header>
 
        <div className="log">
@@ -65,13 +65,17 @@ export default function AvailableCars({listCar,data}) {
             <style jsx>{`
             header{
                 display: flex;
+                align-items: center;
+
               
               }
             main{
+                width:100vw;
                 display:flex;
                 flex-direction: column;
-                width:90vw;
-                height:90vh;
+                align-content: center;
+                alig-items: center;
+                height:100vh;
                 overflow-y: scroll;
                 border-radius: 5px;
             }
@@ -89,9 +93,9 @@ export default function AvailableCars({listCar,data}) {
             }
        
             section{
-                margin:10px 10px;
+                margin:10px 20px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
                 border: 1px solid #eee;
-                border-radius: 10px;
                 display:flex;
                 flex-direction: column;
                 align-items: center;
@@ -99,6 +103,7 @@ export default function AvailableCars({listCar,data}) {
                 justify-content: space-between;
             }
             button{
+                box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
                 background-color: #000;
                 color: #fff;
                 border-radius: 5px;
@@ -113,7 +118,8 @@ export default function AvailableCars({listCar,data}) {
             }
          
             img{
-                width:200px;
+                max-width:270px;
+
             }
             .grid{
                 display:grid;

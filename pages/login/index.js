@@ -64,7 +64,8 @@ export default function Home() {
 
        
     }
-  };
+  }
+  
   return (
     <>
       <div>
@@ -103,14 +104,13 @@ export default function Home() {
           display: grid;
           place-content: center;
           place-items: center;
-          border: 1px solid #eee;
-          border-radius: 5px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,.8);
           padding: 20px;
         }
         a {
           margin-top: 10px;
           color: #000;
-          border-bottom:1px solid #eee;
+          border-bottom:2px solid #eee;
         }
         .spinner {
           margin-top: 5px;
@@ -160,7 +160,9 @@ export default function Home() {
           padding: 14px 20px;
           color:#fff;
           background-color: #000;
-          border: 1px solid #eee;
+          border: none;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,.8);
+
           border-radius: 5px;
           margin-top: 20px;
           transition: all ease-in 0.7s;
