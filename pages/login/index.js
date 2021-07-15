@@ -142,6 +142,8 @@ export default function Home() {
         h2 {
           font-style: italic;
           margin-bottom: 20px;
+          text-shadow: 0px 0px 2px rgba(0, 0, 0,1);
+
         }
         section {
           display: flex;
@@ -153,8 +155,7 @@ export default function Home() {
         input {
           margin-top: 15px;
           padding: 10px 20px;
-          border: 1px solid #eee;
-          border-radius: 5px;
+          box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
         }
         button {
           padding: 14px 20px;

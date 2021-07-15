@@ -238,6 +238,8 @@ export default function Home() {
         h2 {
           font-style: italic;
           margin-bottom: 20px;
+          text-shadow: 0px 0px 2px rgba(0, 0, 0,1);
+
 
         }
         form {
@@ -255,16 +257,17 @@ export default function Home() {
           margin-bottom: 7px;
           padding: 10px 20px;
           border: 1px solid #eee;
-          border-radius: 5px;
+          box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
         }
         button {
           padding: 14px 20px;
           background-color: #000;
           color: #fff;
-          border: 1px solid #eee;
-          border-radius: 5px;
+          border: none;
           margin-top: 20px;
           transition: all ease-in 0.7s;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
         }
         button:hover {
           background-color: #0009;

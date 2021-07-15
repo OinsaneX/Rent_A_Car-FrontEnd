@@ -89,6 +89,8 @@ export default function Add_Car() {
                 color: #fff;
                 height:200px;
                 text-align: center;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
             }
           
            
@@ -102,8 +104,8 @@ export default function Add_Car() {
             button{
                 margin: 10px 10px;
                 padding:10px 15px;
-                border: 1px solid #333;
-                border-radius: 4px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+                border:none;
                 background-color: #000;
                 color: #fff;
                 transition:all ease-in 0.3s;
@@ -112,11 +114,15 @@ export default function Add_Car() {
                 background-color: #0009;
 
             }
+            h3{
+                text-shadow: 0px 0px 4px rgba(0, 0, 0,1);
+
+            }
             .button{
                 margin: 10px 10px;
                 padding:10px 15px;
-                border: 1px solid #333;
-                border-radius: 4px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
                 background-color: #000;
                 color: #fff;
                 cursor:default;
@@ -128,17 +134,17 @@ export default function Add_Car() {
 
             }
             img{
-                width:340px;
+                max-width:300px;
                 height:200px;
             }
             .card{
                 display:grid;
                 place-content:center;
                 place-items:center;
-                border: 1px solid #eee;
-                max-width:400px;
-                border-radius:10px;
+                max-width:350px;
                 margin:20px 20px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
             }
             p{
                 margin:0;

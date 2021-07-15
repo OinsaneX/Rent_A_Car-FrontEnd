@@ -80,7 +80,7 @@ export default function NavBar() {
           top:85px;
           margin:0;
           margin-right:5px;
-          border-radius:6px;
+          box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
           list-style:none;
         }
        
@@ -105,7 +105,7 @@ export default function NavBar() {
       }
           nav {
             box-shadow: 0px 0px 18px rgba(0, 0, 0,.6);
-
+            overflow:hidden;
             background-color: #000;
             height: 80px;
             display: flex;
@@ -134,6 +134,7 @@ export default function NavBar() {
           section {
             display: flex;
             align-items: center;
+            
           }
           p{
             display:none;

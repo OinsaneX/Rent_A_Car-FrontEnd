@@ -158,13 +158,14 @@ export default function AddCar() {
   margin-top: 7px;
   margin-bottom: 7px;
   padding: 10px 20px;
-  border: 1px solid #eee;
-  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
 }
 textarea{
-    border: 1px solid #eee;
-    border-radius: 5px;
+    border: none;
     width: 90%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
+
     height: 250px;
     margin: 0;
     text-align: center
@@ -205,8 +206,9 @@ h5{
 }
 select{
     padding:10px 80px;
-    border-radius:5px;
-    border:1px solid #eee;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
+
+    border:none;
     margin-top:10px;
 
   }
@@ -234,9 +236,8 @@ h5{
                 display:grid;
                 place-content:center;
                 place-items:center;
-                border: 1px solid #eee;
                 max-width:400px;
-                border-radius:10px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
                 margin:20px 20px;
             }
 form{
@@ -256,8 +257,8 @@ h4{
 button{
      margin: 10px 10px;
     padding:10px 15px;
-     border: 1px solid #333;
-     border-radius: 4px;
+     border: none;
+     box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
      background-color: #0009;
     color: #fff;
     transition:all ease-in 0.3s;
@@ -291,7 +292,7 @@ label {
     margin:12px 20%;
   padding: 12px 18px;
   cursor: pointer;
-  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
   background-color: #000;
   font-size: 16px;
   color: #fff;

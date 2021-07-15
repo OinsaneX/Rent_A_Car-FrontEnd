@@ -199,6 +199,8 @@ export default function index() {
       <style jsx>{`
       h3{
         color: red;
+        text-shadow: 0px 0px 10px rgba(255, 0, 0,1);
+
         margin:0;
         margin-top:10px;
     font-size: 4em;
@@ -242,15 +244,18 @@ export default function index() {
     cursor: default;
     margin:0;
     margin-bottom:10px;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+
       }
 
    
       select{
         padding:10px 0px;
         width: 248px;
-        border-radius:5px;
         border:1px solid #eee;
         margin-top:10px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0,1);
+
 
       }
       .lab{
@@ -294,13 +299,13 @@ export default function index() {
         h4{
           font-style:italic;
           font-size:22px;
+          
         }
         button{
           box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
           background-color:#000;
           padding: 15px 25px;
           margin:0;
-          border-radius:4px;
           border:none;
           color:#fff;
         }
@@ -321,9 +326,10 @@ export default function index() {
         input{
           margin:5px 6px;
           width:248px;
-          border-radius:5px;
         border:1px solid #eee;
         margin-top:10px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0,1);
+
         }
         
         @media only screen and (max-width: 800px) {

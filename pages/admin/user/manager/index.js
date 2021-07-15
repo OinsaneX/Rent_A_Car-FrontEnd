@@ -124,8 +124,11 @@ export default function UserManager({users}) {
                     color:#fff;
                     border:none;
                     padding:10px 12px;
-                    border-radius:5px;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
                     margin:10px 5px;
+                }
+                a:hover {
+                    background-color: #0006;
                 }
                 thead{
                     background-color: #000;

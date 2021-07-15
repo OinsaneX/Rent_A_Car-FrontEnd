@@ -106,7 +106,6 @@ export default function AvailableCars({listCar,data}) {
                 box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
                 background-color: #000;
                 color: #fff;
-                border-radius: 5px;
                 border:none;
                 margin:5px 6px;
                 padding:15px 30px;

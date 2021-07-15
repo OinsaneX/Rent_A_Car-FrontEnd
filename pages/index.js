@@ -21,8 +21,7 @@ export default function Home() {
           display: grid;
           place-content: center;
           place-items: center;
-          border: 1px solid #eee;
-          border-radius: 5px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
           padding: 20px;
         }
         h4 {
@@ -32,8 +31,7 @@ export default function Home() {
           padding: 14px 20px;
           background-color: #000;
           color: #fff;
-          border: 1px solid #eee;
-          border-radius: 5px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
           margin-top: 20px;
           transition: all ease-in 0.7s;
         }
