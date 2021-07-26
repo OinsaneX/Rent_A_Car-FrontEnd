@@ -183,7 +183,7 @@ export default function Home() {
                 name="nacionality"
                 value={form.nacionality}
                 onChange={(e) => onChangeInput(e)}
-                type="password"
+                type="text"
                 placeholder="Nacionalidad"
               />
             </section>
@@ -193,7 +193,7 @@ export default function Home() {
                 name="country"
                 value={form.country}
                 onChange={(e) => onChangeInput(e)}
-                type="password"
+                type="text"
                 placeholder="Pais"
               />
             </section>
@@ -203,7 +203,7 @@ export default function Home() {
                 name="address"
                 value={form.address}
                 onChange={(e) => onChangeInput(e)}
-                type="password"
+                type="text"
                 placeholder="Direccion"
               />
             </section>

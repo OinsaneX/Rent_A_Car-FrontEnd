@@ -91,6 +91,8 @@ export default function NavBar() {
             color:#fff;
             font-style:italic;
             cursor:default;
+            text-shadow: 0px 0px 5px rgba(255, 255, 255,1);
+
         }
         li{
           margin: 0px 15px;
@@ -118,6 +120,9 @@ export default function NavBar() {
             font-style: italic;
             color:#fff;
           }
+          .cont:hover{
+            text-decoration:underline;
+        }
           a {
             font-size: 20px;
             font-style: italic;

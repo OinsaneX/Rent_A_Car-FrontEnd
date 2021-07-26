@@ -13,7 +13,7 @@ import {
 
 export default function index() {
   const hoursArray = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"]
-  const today = `${new Date().getFullYear()}-${String(new Date().getMonth()).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`
+  const today = `${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,0)}-${String(new Date().getDate()).padStart(2,0)}`
 
   const router = useRouter();
   const [loading, setloading] = useState(false)

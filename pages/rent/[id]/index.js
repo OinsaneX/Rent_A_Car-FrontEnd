@@ -1,8 +1,23 @@
 import axios from "axios";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+
 
 export default function Contract({rent,car,user}) {
+
+    const sendEmailConfirm =async()=>{
+        await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{email:user.email,asunto:"Confirmar Renta",rent})
+        NotificationManager.success("Se ha enviado el link de confirmacion a tu correo electrónico","Finalizado", 4000)
+
+    }
+
+
     return (
         <>
+        <NotificationContainer/>
         <div className="full">
             <header>
             <h3>Detalles de la reserva</h3>
@@ -37,7 +52,7 @@ export default function Contract({rent,car,user}) {
             </main>
 
         </div>
-        <button><h2>OK</h2></button>
+        <button onClick={()=>sendEmailConfirm()}><h2>OK</h2></button>
 
         <style jsx>{`
 
