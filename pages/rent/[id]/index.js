@@ -4,9 +4,11 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import { useRouter } from "next/router";
 
 
 export default function Contract({rent,car,user}) {
+    const router = useRouter();
 
     const sendEmailConfirm =async()=>{
         await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{email:user.email,asunto:"Confirmar Renta",rent})
