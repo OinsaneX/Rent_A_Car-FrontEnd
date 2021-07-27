@@ -1,7 +1,6 @@
-import axios from "axios";
 import Link from "next/link";
 
-export default function Confirm({id}) {
+export default function emailSend() {
 
 
   
@@ -9,7 +8,7 @@ export default function Confirm({id}) {
        <>
         <div>
             <h2>
-                Su renta ha sido confirmada
+               Se ha enviado un link de confirmacion a su correo
             </h2>
 
             <Link href="/rent">
@@ -45,12 +44,3 @@ export default function Confirm({id}) {
     );
 }
 
-export const getServerSideProps = async (ctx) => {
-const {id} = ctx.query
-await axios.get(`https://desolate-sea-14156.herokuapp.com/rent/${id}/confirm`)
-    return {
-        props:{
-           data: null
-        }
-    }
-}

@@ -18,9 +18,10 @@ export default function AvailableCars({listCar,data}) {
 
     const onSubmit = async(idCar,price,imageCar)=>{
        await getUser(async(user)=>{
-           console.log(idCar,price)
-           await axios.put(`https://desolate-sea-14156.herokuapp.com/rent/${data._id}`,{idCar,idUser:user._id,price,imageCar})
-           .then(()=>router.push(`/rent/${data._id}`))
+          if(user){
+            await axios.put(`https://desolate-sea-14156.herokuapp.com/rent/${data._id}`,{idCar,idUser:user._id,price,imageCar})
+            .then(()=>router.push(`/rent/${data._id}`))
+          }
           
        })
        if(!localStorage.getItem("token")){
