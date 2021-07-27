@@ -102,9 +102,9 @@ export default function index() {
   <option value="Artemisa">Artemisa</option>
   <option value="Baracoa Airport">Baracoa Airport</option>
   <option value="Camaguey">Camaguey</option>
-  <option value="Havana">Havana</option>
-  <option value="Havana Aeopuerto Terminal 2">Havana Aeopuerto Terminal 2</option>
-  <option value="Havana AeropuertoTerminal 3">Havana AeropuertoTerminal 3</option>
+  <option value="Habana">Havana</option>
+  <option value="Habana Aeopuerto Terminal 2">Havana Aeopuerto Terminal 2</option>
+  <option value="Habana AeropuertoTerminal 3">Havana AeropuertoTerminal 3</option>
 </select>
         </div>
         <div className="inp">
@@ -223,6 +223,8 @@ export default function index() {
       background-color: #fff;
       border:1px solid #eee;
       box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+      
+
     }
      .form{
        display:flex;

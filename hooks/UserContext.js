@@ -24,11 +24,13 @@ export const AuthProvider = ({ children }) => {
          }
          else{
             setUser(null) 
+            callback(null)
             localStorage.removeItem("token")
          } 
       })
         
     } else {
+      callback(null)
       setUser(null);
     }};
 

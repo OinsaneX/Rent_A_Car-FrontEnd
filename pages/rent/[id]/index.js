@@ -10,8 +10,12 @@ export default function Contract({rent,car,user}) {
 
     const sendEmailConfirm =async()=>{
         await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{email:user.email,asunto:"Confirmar Renta",rent})
-        NotificationManager.success("Se ha enviado el link de confirmacion a tu correo electrónico","Finalizado", 4000)
-
+        NotificationManager.success("Se ha enviado el link de confirmacion a tu correo electrónico","Finalizado", 2500)
+        setTimeout(()=>{
+            router.replace("/home");
+          },3000
+           
+          )
     }
 
 

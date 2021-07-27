@@ -21,8 +21,8 @@ export default function Home() {
 
 
   useEffect(() => {
-   getUser(()=>{
-     router.replace("/rent")
+   getUser((res)=>{
+     res && router.replace("/rent")
    })
     
   }, [])

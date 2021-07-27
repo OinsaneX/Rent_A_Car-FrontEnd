@@ -16,10 +16,10 @@ export default function AvailableCars({listCar,data}) {
         setlogged(null)
     }
 
-    const onSubmit = async(idCar,price)=>{
+    const onSubmit = async(idCar,price,imageCar)=>{
        await getUser(async(user)=>{
            console.log(idCar,price)
-           await axios.put(`https://desolate-sea-14156.herokuapp.com/rent/${data._id}`,{idCar,idUser:user._id,price})
+           await axios.put(`https://desolate-sea-14156.herokuapp.com/rent/${data._id}`,{idCar,idUser:user._id,price,imageCar})
            .then(()=>router.push(`/rent/${data._id}`))
           
        })
@@ -56,7 +56,7 @@ export default function AvailableCars({listCar,data}) {
 
                         <div className="btn">
                             <p>Precio : {car.price_per_day * data.days}</p>
-                            <button onClick={()=>onSubmit(car._id,car.price_per_day * data.days)}><p>Seleccionar</p></button>
+                            <button onClick={()=>onSubmit(car._id,car.price_per_day * data.days,car.imageUrl)}><p>Seleccionar</p></button>
                         </div>
                     </section>
                 ))}
