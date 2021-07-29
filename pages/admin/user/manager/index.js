@@ -25,7 +25,7 @@ export default function UserManager({users}) {
    async function  deleteUser (id){
     confirmAlert({
         title: 'Confirmar',
-        message: 'Estas segura que deseas eliminar ese usuario.',
+        message: 'Estas seguro que deseas eliminar ese usuario.',
         buttons: [
           {
             label: 'Si',

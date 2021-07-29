@@ -38,7 +38,7 @@ export default function Profile() {
     const cancelRent = async(id) =>{
         confirmAlert({
             title: 'Confirmar',
-            message: 'Estas segura que deseas cancelar la renta.',
+            message: 'Estas seguro que deseas cancelar la renta.',
             buttons: [
               {
                 label: 'Si',

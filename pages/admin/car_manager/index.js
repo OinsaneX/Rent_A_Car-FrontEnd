@@ -30,7 +30,7 @@ export default function Add_Car() {
     const deleteCar = async (id) =>{
         confirmAlert({
             title: 'Confirmar',
-            message: 'Estas segura que deseas eliminar ese usuario.',
+            message: 'Estas seguro que deseas eliminar ese usuario.',
             buttons: [
               {
                 label: 'Si',
@@ -153,7 +153,7 @@ export default function Add_Car() {
 
             }
             img{
-                max-width:300px;
+               width:300px;
                 height:200px;
             }
             .card{
