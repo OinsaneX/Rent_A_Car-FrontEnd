@@ -21,7 +21,7 @@ export default function emailSend() {
             height:100vh;
             display:grid;
             place-content: center;
-            plca-items: center;
+            place-items: center;
         }
         h3{
             margin:0;

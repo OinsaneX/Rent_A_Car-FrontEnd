@@ -8,6 +8,8 @@ import {
   NotificationManager,
 } from "react-notifications";
 import AdminNav from '../../../components/AdminNav'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function Add_Car() {
 
@@ -26,15 +28,32 @@ export default function Add_Car() {
     }
 
     const deleteCar = async (id) =>{
-        await axios.delete(`https://desolate-sea-14156.herokuapp.com/car/${id}`)
-        .then((res) => {NotificationManager.success("Se ha eliminado del sistema el auto","Éxito",2000)
-        getCars()
-    })
-        .catch((err) =>  NotificationManager.error(
-            "A veces ocurre este error",
-            "Error",
-            3000
-          ))
+        confirmAlert({
+            title: 'Confirmar',
+            message: 'Estas segura que deseas eliminar ese usuario.',
+            buttons: [
+              {
+                label: 'Si',
+                onClick: async() => {
+                    await axios.delete(`https://desolate-sea-14156.herokuapp.com/car/${id}`)
+                    .then((res) => {NotificationManager.success("Se ha eliminado del sistema el auto","Éxito",2000)
+                    getCars()
+                })
+                    .catch((err) =>  NotificationManager.error(
+                        "A veces ocurre este error",
+                        "Error",
+                        3000
+                      ))
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => {}
+              }
+            ]
+          })
+          
+  
     }
 
     return (

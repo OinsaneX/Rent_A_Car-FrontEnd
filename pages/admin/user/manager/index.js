@@ -4,6 +4,8 @@ import AdminNav from "../../../../components/AdminNav";
 import Delete from '../../../../svgs/icons/Delete'
 import Edit from '../../../../svgs/icons/Edit'
 import "react-notifications/lib/notifications.css";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import {
   NotificationContainer,
@@ -21,11 +23,27 @@ export default function UserManager({users}) {
     
 
    async function  deleteUser (id){
-        await axios.delete(`https://desolate-sea-14156.herokuapp.com/user/${id}`)
-        .then(() => {
-            NotificationManager.success("Usuario Eliminado con suceso","Éxito",2000)
-            getUsers()
-        })
+    confirmAlert({
+        title: 'Confirmar',
+        message: 'Estas segura que deseas eliminar ese usuario.',
+        buttons: [
+          {
+            label: 'Si',
+            onClick: async() => {
+                await axios.delete(`https://desolate-sea-14156.herokuapp.com/user/${id}`)
+                .then(() => {
+                    NotificationManager.success("Usuario Eliminado con suceso","Éxito",2000)
+                    getUsers()
+                })
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => {}
+          }
+        ]
+      })
+      
     }
 
     async function getUsers(){
