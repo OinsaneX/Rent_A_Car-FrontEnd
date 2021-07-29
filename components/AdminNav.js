@@ -16,12 +16,8 @@ export default function AdminNav() {
                     Usuarios
                 </a>
             </Link>
-            <Link href="/">
-                <a className="link">
-                    Registro
-                </a>
-            </Link>
         
+     
         </div>
         <style jsx>
             {`

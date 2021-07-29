@@ -100,7 +100,7 @@ export default function Profile() {
             {rents.map((rent)=>(
               !rent.cancelated && <div className="card">
                    <div className="close" onClick={() => cancelRent(rent._id)}>
-                       <h1> Cancelar X</h1>
+                       <h1> Cancelar</h1>
                    </div>
                    <img src={rent.imageCar} alt="" />
                    <div className="info">
@@ -116,6 +116,7 @@ export default function Profile() {
                 </div>
                 <div className="col flex1">
                 <h3>{`Cliente : ${user.name}`}</h3>
+                <h3>{`La renta ${!rent.confirmed ? "no" : ""} ha sido confirmada`}</h3>
                 </div>
 
                    </div>
@@ -144,6 +145,8 @@ export default function Profile() {
                   padding: 6px 8px;
                   background-color: red;
                   cursor:pointer;
+                  box-shadow: 0px 0px 10px rgba(255, 0, 0,1);
+
               }
               .card{
                   position:relative;
