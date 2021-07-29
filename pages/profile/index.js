@@ -3,6 +3,13 @@ import {useUser} from '../../hooks/UserContext'
 import User from '../../svgs/img/User'
 import {useRouter} from 'next/router'
 import axios from 'axios';
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function Profile() {
     const router = useRouter();
@@ -17,15 +24,44 @@ export default function Profile() {
         }  
         else{
             setUser(res)
-            await await axios.get(`https://desolate-sea-14156.herokuapp.com/rent/user/${res._id}`)
-            .then(res =>setrents(res.data))
+            getRents(res._id)
         }
      })
     }, [])
   
 
+    const getRents = async(res_id)=> {
+         await axios.get(`https://desolate-sea-14156.herokuapp.com/rent/user/${res_id}`)
+        .then(response =>setrents(response.data))
+    }
+
+    const cancelRent = async(id) =>{
+        confirmAlert({
+            title: 'Confirmar',
+            message: 'Estas segura que deseas cancelar la renta.',
+            buttons: [
+              {
+                label: 'Si',
+                onClick: async() => {
+                    await axios.get(`https://desolate-sea-14156.herokuapp.com/rent/${id}/cancel`)
+                    .then(() => {
+                        NotificationManager.success("Renta cancelada con suceso", "Ok", 3000);
+                        getRents()
+                    })
+
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => {}
+              }
+            ]
+          })
+    }
+
     return (
         <>
+        <NotificationContainer />
         <header>
            <div className="imgUser">
            <User/>
@@ -60,11 +96,11 @@ export default function Profile() {
                 Tus reservas : 
             </h2>
 
-            <section>
+            <section> 
             {rents.map((rent)=>(
-               <div className="card">
-                   <div className="close">
-                       <h1>X</h1>
+              !rent.cancelated && <div className="card">
+                   <div className="close" onClick={() => cancelRent(rent._id)}>
+                       <h1> Cancelar X</h1>
                    </div>
                    <img src={rent.imageCar} alt="" />
                    <div className="info">
@@ -99,12 +135,15 @@ export default function Profile() {
               }
               h1{
                   margin:0;
-                  color:red
+                  color:#fff;
               }
               .close{
                   position:absolute;
                   top:5px;
                   right:5px;
+                  padding: 6px 8px;
+                  background-color: red;
+                  cursor:pointer;
               }
               .card{
                   position:relative;
