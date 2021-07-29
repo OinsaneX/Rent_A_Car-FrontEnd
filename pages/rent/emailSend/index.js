@@ -35,6 +35,10 @@ export default function emailSend() {
             box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
             transition:all ease-in 0.6s;
         }
+        h2{
+            margin:0 20px;
+            text-align: center;
+        }
         a:hover {
             background-color: #eee;
             color:#000;
