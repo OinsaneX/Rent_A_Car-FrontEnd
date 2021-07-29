@@ -11,7 +11,7 @@ export default function Contract({rent,car,user}) {
     const router = useRouter();
 
     const sendEmailConfirm =async()=>{
-        await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{email:user.email,asunto:"Confirmar Renta",rent})
+        await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{car,email:user.email,asunto:"Confirmar Renta",rent})
         .then(res=> router.replace("/rent/emailSend"))
       
            
