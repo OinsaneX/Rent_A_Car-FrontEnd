@@ -7,6 +7,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import axios from "axios";
+import SelectCountry from "./SelectCountry";
 
 
 export default function PopUpRegister({close}) {
@@ -27,6 +28,7 @@ export default function PopUpRegister({close}) {
       conf: "",
       address:"",
       country: "",
+      pasport: "",
     });
     const [loading, setloading] = useState(false);
   
@@ -221,16 +223,7 @@ export default function PopUpRegister({close}) {
                   placeholder="Ej. fulano@gmail.com"
                 />
               </section>
-              <section>
-                <p>CI :</p>
-                <InputMask
-                  mask="99999999999"
-                  name="identity"
-                  value={formReg.identity}
-                  onChange={(e) => onChangeInputReg(e)}
-                  placeholder="XXXXXXXXXXX"
-                />
-              </section>
+            
               <section>
                 <p>Teléfono :</p>
                 <InputMask
@@ -262,25 +255,37 @@ export default function PopUpRegister({close}) {
                 />
               </section>
               <section>
-                <p>Nacionalidad :</p>
-                <input
-                  name="nacionality"
-                  value={formReg.nacionality}
-                  onChange={(e) => onChangeInputReg(e)}
-                  type="text"
-                  placeholder="Nacionalidad"
-                />
-              </section>
-              <section>
-                <p>Pais :</p>
-                <input
-                  name="country"
-                  value={formReg.country}
-                  onChange={(e) => onChangeInputReg(e)}
-                  type="text"
-                  placeholder="Pais"
-                />
-              </section>
+              <p>Nacionalidad :</p>
+              <SelectCountry name="nacionality" country={formReg.nacionality} onChangeInput={onChangeInputReg}/>
+
+            </section>
+            <section>
+              <p>Residencia :</p>
+            <SelectCountry name="country" country={formReg.country} onChangeInput={onChangeInputReg}/>
+      
+            </section>
+
+              {formReg.nacionality !=""&& (formReg.nacionality == "Cuba" ?  <section>
+              <p>CI :</p>
+              <InputMask
+                mask="99999999999"
+                name="identity"
+                value={formReg.identity}
+                onChange={(e) => onChangeInput(e)}
+                placeholder="XXXXXXXXXXX"
+              />
+            </section>  
+            :  
+            <section>
+            <p>Pasaporte :</p>
+            <InputMask
+              mask="aa999999"
+              name="pasport"
+              value={formReg.pasport}
+              onChange={(e) => onChangeInput(e)}
+              placeholder="AA123456"
+            />
+          </section>)}
               <section>
                 <p>Direccion :</p>
                 <input

@@ -9,6 +9,7 @@ import {
 } from "react-notifications";
 import { useState } from "react";
 import axios from "axios";
+import SelectCountry from "../../components/SelectCountry";
 
 export default function Home() {
   const router = useRouter();
@@ -23,6 +24,7 @@ export default function Home() {
     conf: "",
     address:"",
     country: "",
+    pasport:""
   });
   const onSubmit = async(e) => {
     e.preventDefault();
@@ -97,6 +99,7 @@ export default function Home() {
   }
 
   const onChangeInput = (e) => {
+    console.log(e.target.value,e.target.name)
     setform({ ...form, [e.target.name]: e.target.value });
   };
   return (
@@ -137,16 +140,7 @@ export default function Home() {
                 placeholder="Ej. fulano@gmail.com"
               />
             </section>
-            <section>
-              <p>CI :</p>
-              <InputMask
-                mask="99999999999"
-                name="identity"
-                value={form.identity}
-                onChange={(e) => onChangeInput(e)}
-                placeholder="XXXXXXXXXXX"
-              />
-            </section>
+           
             <section>
               <p>Teléfono :</p>
               <InputMask
@@ -179,24 +173,35 @@ export default function Home() {
             </section>
             <section>
               <p>Nacionalidad :</p>
-              <input
-                name="nacionality"
-                value={form.nacionality}
-                onChange={(e) => onChangeInput(e)}
-                type="text"
-                placeholder="Nacionalidad"
-              />
+              <SelectCountry name="nacionality" country={form.nacionality} onChangeInput={onChangeInput}/>
+
             </section>
             <section>
-              <p>Pais :</p>
-              <input
-                name="country"
-                value={form.country}
-                onChange={(e) => onChangeInput(e)}
-                type="text"
-                placeholder="Pais"
-              />
+              <p>Residencia :</p>
+            <SelectCountry name="country" country={form.country} onChangeInput={onChangeInput}/>
+      
             </section>
+            {form.nacionality !=""&& (form.nacionality == "Cuba" ?  <section>
+              <p>CI :</p>
+              <InputMask
+                mask="99999999999"
+                name="identity"
+                value={form.identity}
+                onChange={(e) => onChangeInput(e)}
+                placeholder="XXXXXXXXXXX"
+              />
+            </section>  
+            :  
+            <section>
+            <p>Pasaporte :</p>
+            <InputMask
+              mask="aa999999"
+              name="pasport"
+              value={form.pasport}
+              onChange={(e) => onChangeInput(e)}
+              placeholder="AA123456"
+            />
+          </section>)}
             <section>
               <p>Direccion :</p>
               <input
@@ -259,6 +264,7 @@ export default function Home() {
           border: 1px solid #eee;
           box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
         }
+       
         button {
           padding: 14px 20px;
           background-color: #000;
