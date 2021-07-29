@@ -99,7 +99,7 @@ export default function PopUpRegister({close}) {
         <main className="windowreg">
             <NotificationContainer />
             <form>
-                <h2>Registrate</h2>
+                <h2>O Registrate</h2>
               <section>
                 <p>Nombre :</p>
                 <input
@@ -176,7 +176,7 @@ export default function PopUpRegister({close}) {
                   name="nacionality"
                   value={form.nacionality}
                   onChange={(e) => onChangeInput(e)}
-                  type="password"
+                  type="text"
                   placeholder="Nacionalidad"
                 />
               </section>
@@ -186,7 +186,7 @@ export default function PopUpRegister({close}) {
                   name="country"
                   value={form.country}
                   onChange={(e) => onChangeInput(e)}
-                  type="password"
+                  type="text"
                   placeholder="Pais"
                 />
               </section>
@@ -196,7 +196,7 @@ export default function PopUpRegister({close}) {
                   name="address"
                   value={form.address}
                   onChange={(e) => onChangeInput(e)}
-                  type="password"
+                  type="text"
                   placeholder="Direccion"
                 />
               </section>

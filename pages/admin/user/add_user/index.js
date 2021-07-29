@@ -10,7 +10,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Add_User() {
-
+    const router = useRouter()
     const [form, setform] = useState({
         name: "",
         username:"",
@@ -72,7 +72,7 @@ export default function Add_User() {
             .then(response=>{
               NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
               setTimeout(()=>{
-                router.replace("/login");
+                router.replace("/admin/user/manager");
               },2000
                
               )
@@ -177,7 +177,7 @@ export default function Add_User() {
                   name="nacionality"
                   value={form.nacionality}
                   onChange={(e) => onChangeInput(e)}
-                  type="password"
+                  type="text"
                   placeholder="Nacionalidad"
                 />
               </section>
@@ -187,7 +187,7 @@ export default function Add_User() {
                   name="country"
                   value={form.country}
                   onChange={(e) => onChangeInput(e)}
-                  type="password"
+                  type="text"
                   placeholder="Pais"
                 />
               </section>
@@ -197,7 +197,7 @@ export default function Add_User() {
                   name="address"
                   value={form.address}
                   onChange={(e) => onChangeInput(e)}
-                  type="password"
+                  type="text"
                   placeholder="Direccion"
                 />
               </section>
