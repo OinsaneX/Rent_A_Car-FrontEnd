@@ -51,6 +51,7 @@ export default function NavBar() {
           {
             despl && !user ?  <ul>
 						<li><Link href="/login"><a>Login</a></Link></li>
+						<li><Link href="/register"><a>Registro</a></Link></li>
             
 							</ul>
               :  

@@ -15,6 +15,18 @@ export default function PopUpRegister({close}) {
     const [form, setform] = useState({
       username: "",
       password: "",
+    })
+    const [formReg, setformReg] = useState({
+      name: "",
+      username:"",
+      email:"",
+      identity: "",
+      nacionality: "",
+      phone: "",
+      password: "",
+      conf: "",
+      address:"",
+      country: "",
     });
     const [loading, setloading] = useState(false);
   
@@ -24,6 +36,85 @@ export default function PopUpRegister({close}) {
       
     }, [])
   
+    const onSubmitReg = async(e) => {
+      e.preventDefault();
+      if (formReg.name == "") {
+        NotificationManager.error(
+          "Introduzca el nombre de usuario",
+          "Error",
+          3000
+        );
+      } else if (formReg.email.indexOf("@") == -1) {
+        NotificationManager.error("Introduzca un email válido", "Error", 3000);
+      } else if (countDigits(formReg.identity) < 11) {
+        NotificationManager.error("Introduzca un CI válido", "Error", 3000);
+      } else if (countDigits(formReg.phone) < 8) {
+        NotificationManager.error(
+          "Introduzca un Número de celular válido",
+          "Error",
+          3000
+        );
+      } else if (formReg.password != formReg.conf) {
+        NotificationManager.error("La contraseña no coincide", "Error", 3000);
+      }
+      else if (formReg.nacionality == "") {
+        NotificationManager.error(
+          "Introduzca su nacionalidad",
+          "Error",
+          3000
+        )}
+      else if (formReg.country == "") {
+        NotificationManager.error(
+          "Introduzca su pais de residencia",
+          "Error",
+          3000
+        )}
+        else if (formReg.address == "") {
+          NotificationManager.error(
+            "Introduzca su direccion",
+            "Error",
+            3000
+          )}
+      else {
+          await axios.post("https://desolate-sea-14156.herokuapp.com/user",formReg)
+          .then(async response=>{
+            await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
+              username: formReg.username,
+              email:formReg.email,
+              asunto:"Bienvenido a Rent_A_Car Cuba",
+              mensaje:"No responda a este correo"
+            })
+            NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
+            await axios.post("https://desolate-sea-14156.herokuapp.com/user/login",formReg)
+            .then(async response => {
+              if(response.data){
+                await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
+                .then(res => {
+                  localStorage.setItem("token",res.data.token)
+                  close()
+                })
+              }})
+          })
+       
+       
+         
+       
+      }
+    };
+    const onChangeInputReg = (e) => {
+      setformReg({ ...formReg, [e.target.name]: e.target.value });
+    };
+    function countDigits(str) {
+      var acu = 0;
+  
+      Array.prototype.forEach.call(str, function (val) {
+        acu += val.charCodeAt(0) > 47 && val.charCodeAt(0) < 58 ? 1 : 0;
+      });
+  
+      return acu;
+    }
+  
+
     const onChangeInput = (e) => {
       setform({ ...form, [e.target.name]: e.target.value });
     };
@@ -65,6 +156,7 @@ export default function PopUpRegister({close}) {
 
     return (
         <div>
+            <NotificationContainer />
 
          <div className="register">
         <div className="close" onClick={() =>close()}>
@@ -97,15 +189,14 @@ export default function PopUpRegister({close}) {
                 </div>
         <div className="reg">
         <main className="windowreg">
-            <NotificationContainer />
             <form>
                 <h2>O Registrate</h2>
               <section>
                 <p>Nombre :</p>
                 <input
                   name="name"
-                  value={form.name}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.name}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="text"
                   placeholder="Ej. Jorge Labrador"
                 />
@@ -114,8 +205,8 @@ export default function PopUpRegister({close}) {
                 <p>Usuario :</p>
                 <input
                   name="username"
-                  value={form.username}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.username}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="text"
                   placeholder="Ej. Jorgito99"
                 />
@@ -124,8 +215,8 @@ export default function PopUpRegister({close}) {
                 <p>Email :</p>
                 <input
                   name="email"
-                  value={form.email}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.email}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="email"
                   placeholder="Ej. fulano@gmail.com"
                 />
@@ -135,8 +226,8 @@ export default function PopUpRegister({close}) {
                 <InputMask
                   mask="99999999999"
                   name="identity"
-                  value={form.identity}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.identity}
+                  onChange={(e) => onChangeInputReg(e)}
                   placeholder="XXXXXXXXXXX"
                 />
               </section>
@@ -144,8 +235,8 @@ export default function PopUpRegister({close}) {
                 <p>Teléfono :</p>
                 <InputMask
                   name="phone"
-                  value={form.phone}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.phone}
+                  onChange={(e) => onChangeInputReg(e)}
                   mask="99999999"
                   placeholder="Fone  Ex: xx-xx-xx-xx"
                 />
@@ -154,8 +245,8 @@ export default function PopUpRegister({close}) {
                 <p>Contraseña :</p>
                 <input
                   name="password"
-                  value={form.password}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.password}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="password"
                   placeholder="Contraseña"
                 />
@@ -164,8 +255,8 @@ export default function PopUpRegister({close}) {
                 <p>Confirmar :</p>
                 <input
                   name="conf"
-                  value={form.conf}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.conf}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="password"
                   placeholder="Confirmar Contraseña"
                 />
@@ -174,8 +265,8 @@ export default function PopUpRegister({close}) {
                 <p>Nacionalidad :</p>
                 <input
                   name="nacionality"
-                  value={form.nacionality}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.nacionality}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="text"
                   placeholder="Nacionalidad"
                 />
@@ -184,8 +275,8 @@ export default function PopUpRegister({close}) {
                 <p>Pais :</p>
                 <input
                   name="country"
-                  value={form.country}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.country}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="text"
                   placeholder="Pais"
                 />
@@ -194,14 +285,14 @@ export default function PopUpRegister({close}) {
                 <p>Direccion :</p>
                 <input
                   name="address"
-                  value={form.address}
-                  onChange={(e) => onChangeInput(e)}
+                  value={formReg.address}
+                  onChange={(e) => onChangeInputReg(e)}
                   type="text"
                   placeholder="Direccion"
                 />
               </section>
             </form>
-            <button onClick={(e) => onSubmit(e)}><p>Registrar</p></button>
+            <button onClick={(e) => onSubmitReg(e)}><p>Registrar</p></button>
 
           </main>
         </div>
