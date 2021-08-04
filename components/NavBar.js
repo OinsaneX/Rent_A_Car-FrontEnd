@@ -52,12 +52,14 @@ export default function NavBar() {
             despl && !user ?  <ul>
 						<li><Link href="/login"><a>Login</a></Link></li>
 						<li><Link href="/register"><a>Registro</a></Link></li>
+						<li><Link href="/services"><a>Servicios</a></Link></li>
             
 							</ul>
               :  
               despl && user &&  <ul>
               <li><Link href="/profile"><a>Perfil</a></Link></li>
-            
+              <li><Link href="/services"><a>Servicios</a></Link></li>
+
               {user.role=="admin" && <li><Link href="/admin/car_manager"><a>Administración</a></Link></li>}
               <li onClick={()=>logout()}>Salir</li>
                 </ul>
