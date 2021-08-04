@@ -19,7 +19,7 @@ export default function AvailableCars({listCar,data}) {
     const onSubmit = async(idCar,price,imageCar)=>{
        await getUser(async(user)=>{
           if(user){
-            await axios.put(`https://desolate-sea-14156.herokuapp.com/rent/${data._id}`,{idCar,idUser:user._id,price,imageCar})
+            await axios.put(`https://desolate-sea-14156.herokuapp.com/rent/${data._id}`,{idCar,idUser:user._id,price,imageCar,user_name:user.name})
             .then(()=>router.push(`/rent/${data._id}`))
           }
           
@@ -75,7 +75,7 @@ export default function AvailableCars({listCar,data}) {
                 display:flex;
                 flex-direction: column;
                 align-content: center;
-                alig-items: center;
+                align-items: center;
                 height:100vh;
                 overflow-y: scroll;
                 border-radius: 5px;
@@ -98,6 +98,7 @@ export default function AvailableCars({listCar,data}) {
                 box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
                 border: 1px solid #eee;
                 display:flex;
+                width:95%;
                 flex-direction: column;
                 align-items: center;
                 align-content: center;

@@ -16,6 +16,11 @@ export default function AdminNav() {
                     Usuarios
                 </a>
             </Link>
+            <Link href="/admin/rents">
+                <a className="link">
+                    Rentas
+                </a>
+            </Link>
         
      
         </div>
@@ -46,7 +51,7 @@ export default function AdminNav() {
                 margin:0;
             }
             h2{
-                text-shadow: 0px 0px 4px rgba(255, 255, 255,1);
+                text-shadow: 0px 0px 2px rgba(255, 255, 255,1);
 
             }
             .link{
