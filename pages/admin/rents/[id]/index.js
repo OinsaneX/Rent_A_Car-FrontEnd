@@ -54,7 +54,7 @@ export default function Details({rent,car,user}) {
                 <h3>{`Teléfono : ${user.phone}`}</h3>
                 </div>
 
-                <h3>{rent.cancelated ? "La renta fue cancelada por el usuario" : !rent.active && "Renta inactiva porque El usuario eliminó la cuenta "}</h3>
+                <h3 className="red">{rent.cancelated ? "La renta fue cancelada por el usuario" : !rent.active && "Renta inactiva porque El usuario eliminó la cuenta "}</h3>
                 </section>
 
             </main>
@@ -66,6 +66,9 @@ export default function Details({rent,car,user}) {
         .full{
             width:100vw;
             height:100vh;
+        }
+        .red{
+            color:red;
         }
         h3,h4{
             margin:4px 5px;
