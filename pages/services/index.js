@@ -29,16 +29,7 @@ export default function Services() {
 						<h4>Envie formulario para trabajar con nosotros como chofer</h4>
 						<Link href="/workForm"><a>Enviar</a></Link>
 					</div>
-					<div className="card">
-						<h3>Sobre</h3>
-
-						<header>
-							<About />
-						</header>
-
-						<h4>Descubra el equipo de la empresa</h4>
-						<Link href="/discover"><a>Descubrir</a></Link>
-					</div>
+					
 				</section>
 			</main>
 

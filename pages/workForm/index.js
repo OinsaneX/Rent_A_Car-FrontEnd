@@ -88,6 +88,7 @@ export default function WorkForm() {
                     <textarea  />
                     </div>
                     <div className="file">
+                        <h5>Foto de la licencia de conducción :</h5>
                     <label  htmlFor="upload">Escoger imagen</label>
                         <input id="upload" type="file" accept="image/*" onChange={(e)=>onAddImage(e)} placeholder="imagen"/>
 
