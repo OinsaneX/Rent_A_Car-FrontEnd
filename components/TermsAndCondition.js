@@ -44,11 +44,11 @@ export default function TermsAndCondition({close}) {
 
     </li>
     <li>
-    El tiempo de arriendo es el consignado en el contrato y se computa en base a horas y días desde el acto de su firma, debiendo liquidarlo en la fecha y hora estipulada. Si el cliente desea prolongar la renta deberá presentarse en la oficina de Cubacar más próxima para legalizar la tenencia del vehículo.
+    El tiempo de arriendo es el consignado en el contrato y se computa en base a horas y días desde el acto de su firma, debiendo liquidarlo en la fecha y hora estipulada. Si el cliente desea prolongar la renta deberá presentarse en la oficina de RentACar más próxima para legalizar la tenencia del vehículo.
 
     </li>
     <li>
-    El cliente abonará en calidad de depósito el importe estipulado en el tarifario público de Cubacar para cada tipo de vehículo. Si el depósito de garantía es en forma de comprobante de cargo en tarjeta de crédito firmado en blanco, Cubacar estará autorizado a llenarlo y cobrarlo en cualquier momento sin previo aviso por los valores gastados por el cliente de conformidad con las cláusulas del presente contrato.
+    El cliente abonará en calidad de depósito el importe estipulado en el tarifario público de RentACar para cada tipo de vehículo. Si el depósito de garantía es en forma de comprobante de cargo en tarjeta de crédito firmado en blanco, RentACar estará autorizado a llenarlo y cobrarlo en cualquier momento sin previo aviso por los valores gastados por el cliente de conformidad con las cláusulas del presente contrato.
 
     </li>
     <li>
@@ -56,7 +56,7 @@ export default function TermsAndCondition({close}) {
 
     </li>
     <li>
-    Cubacar solo realizará devoluciones al titular del contrato y en la misma forma de pago en que se efectuó el arrendamiento.
+    RentACar solo realizará devoluciones al titular del contrato y en la misma forma de pago en que se efectuó el arrendamiento.
 
     </li>
     <li>
@@ -72,23 +72,23 @@ export default function TermsAndCondition({close}) {
 
     </li>
     <li>
-    El cliente renuncia a todas demandas contra Cubacar por cualquier daño accidental causado por mala manipulación, incumplimiento de las normas de tránsito o de mantenimiento del vehículo.
+    El cliente renuncia a todas demandas contra RentACar por cualquier daño accidental causado por mala manipulación, incumplimiento de las normas de tránsito o de mantenimiento del vehículo.
 
     </li>
     <li>
-    Cubacar no se responsabiliza por el robo, pérdida o daño de cualquier bien, propiedad personal del cliente o sus pasajeros, dejados o abandonados en el vehículo durante o después del período de renta.
+    RentACar no se responsabiliza por el robo, pérdida o daño de cualquier bien, propiedad personal del cliente o sus pasajeros, dejados o abandonados en el vehículo durante o después del período de renta.
 
     </li>
     <li>
-    Cuando así lo decida Cubacar podrá cancelar este contrato y proceder al reembolso del 100% del tiempo no utilizado, excepto que incurra en violaciones de lo establecido en el presente.
+    Cuando así lo decida RentACar podrá cancelar este contrato y proceder al reembolso del 100% del tiempo no utilizado, excepto que incurra en violaciones de lo establecido en el presente.
 
     </li>
     <li>
-    Cubacar releva a su cliente de responsabilidad, siempre que este cumpla con lo estipulado en el presente contrato, protegiendo al mismo contra incendio, robo total o parcial, choque o vuelco, accidentes, y catástrofes naturales, así como por daños a la propiedad ajena y/o lesiones o muerte producidas a terceras personas, provocadas en ocasión e conducir un vehículo por la vía pública. En todos los casos el cliente deberá notificar de inmediato a las autoridades competentes y presentar a la agencia antes o en el momento de liquidar los adeudos, el comprobante de haber formulado la denuncia en el caso de pérdida o sustracciones; y en el caso de accidente, informe de la policía del lugar del hecho o e los inspectores de la Empresa , que será la vía para definir su culpabilidad o no en los daños ocasionados. De ser culpable, el cliente quedará cubierto durante el período de vigencia del contrato y en caso de accidente hasta doce horas posteriores al vencimiento del mismo, con su correspondiente trámite legal.
+    RentACar releva a su cliente de responsabilidad, siempre que este cumpla con lo estipulado en el presente contrato, protegiendo al mismo contra incendio, robo total o parcial, choque o vuelco, accidentes, y catástrofes naturales, así como por daños a la propiedad ajena y/o lesiones o muerte producidas a terceras personas, provocadas en ocasión e conducir un vehículo por la vía pública. En todos los casos el cliente deberá notificar de inmediato a las autoridades competentes y presentar a la agencia antes o en el momento de liquidar los adeudos, el comprobante de haber formulado la denuncia en el caso de pérdida o sustracciones; y en el caso de accidente, informe de la policía del lugar del hecho o e los inspectores de la Empresa , que será la vía para definir su culpabilidad o no en los daños ocasionados. De ser culpable, el cliente quedará cubierto durante el período de vigencia del contrato y en caso de accidente hasta doce horas posteriores al vencimiento del mismo, con su correspondiente trámite legal.
 
     </li>
     <li>
-    El cliente perderá todo el derecho a ser relevado de responsabilidad por Cubacar cuando haya incurrido en actuaciones negligentes o violación de las leyes vigentes y lo pactado en el presente contrato, así como por la conducción del vehículo en estado de embriaguez o bajo los efectos de sustancias psicotrópicas y la manipulación del mismo por un conductor no autorizado en el presente contrato, debiendo pagar el importe total de las de las afectaciones causadas al vehículo y a terceros, en caso de detectarse alguna de estas irregularidades.
+    El cliente perderá todo el derecho a ser relevado de responsabilidad por RentACar cuando haya incurrido en actuaciones negligentes o violación de las leyes vigentes y lo pactado en el presente contrato, así como por la conducción del vehículo en estado de embriaguez o bajo los efectos de sustancias psicotrópicas y la manipulación del mismo por un conductor no autorizado en el presente contrato, debiendo pagar el importe total de las de las afectaciones causadas al vehículo y a terceros, en caso de detectarse alguna de estas irregularidades.
 
     </li>
     <li>
