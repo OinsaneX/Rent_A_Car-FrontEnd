@@ -34,9 +34,7 @@ export default function NavBar() {
           <h3> Rent_A_Car</h3>
         </section>
         <section>
-          <Link href="/offerts">
-            <a className="margin">Ofertas</a>
-          </Link>
+        
           <Link href="/rent">
             <a className="margin">Rentar</a>
           </Link>

@@ -59,6 +59,11 @@ export default function UserManager({users}) {
 
             <AdminNav/>
             <main>
+            <Link href="/admin/user/add_user">
+                    <a>
+                        Nuevo Usuario
+                    </a>
+                </Link>
                 <section>
                     <h2>Administradores :</h2>
                     <table>
@@ -88,11 +93,7 @@ export default function UserManager({users}) {
 </tbody>
                     </table>
                 </section>
-                <Link href="/admin/user/add_user">
-                    <a>
-                        Nuevo Administrador
-                    </a>
-                </Link>
+              
 
                 <hr />
                 <section>
@@ -112,6 +113,36 @@ export default function UserManager({users}) {
                    <tbody>
                    {userList.map((user)=>(
                         user.role=="client" && <tr key={user._id}>
+                            <td data-col-title="Nombre"><p>{user.name}</p></td>
+                         <td data-col-title="Usuario"><p>{user.username}</p></td>
+                         <td data-col-title="Email"><p>{user.email}</p></td>
+                         <td data-col-title="CI"><p>{user.identity}</p></td>
+                         <td data-col-title="Pais"><p>{user.country}</p></td>
+                         <td data-col-title="Opciones" className="flex"><label onClick={()=>deleteUser(user._id)}><Delete/></label> <label><Edit/></label></td>
+
+                         </tr>
+                    ))}
+                   </tbody>
+                    </table>
+                </section>
+                <hr />
+                <section>
+                    <h2>Comercio :</h2>
+                    <table>
+                    <thead>
+                    <tr>
+                        <th><p>Nombre</p></th>
+                        <th><p>Usuario</p></th>
+                        <th><p>Email</p></th>
+                        <th><p>CI</p></th>
+                        <th><p>Pais</p></th>
+                        <th><p>Opciones</p></th>
+
+                    </tr>
+                    </thead>
+                   <tbody>
+                   {userList.map((user)=>(
+                        user.role=="comercial" && <tr key={user._id}>
                             <td data-col-title="Nombre"><p>{user.name}</p></td>
                          <td data-col-title="Usuario"><p>{user.username}</p></td>
                          <td data-col-title="Email"><p>{user.email}</p></td>

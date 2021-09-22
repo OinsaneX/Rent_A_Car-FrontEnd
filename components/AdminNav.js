@@ -21,6 +21,11 @@ export default function AdminNav() {
                     Rentas
                 </a>
             </Link>
+            <Link href="/admin/workForm">
+                <a className="link">
+                    Formularios
+                </a>
+            </Link>
         
      
         </div>

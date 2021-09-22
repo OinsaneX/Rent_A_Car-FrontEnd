@@ -21,7 +21,7 @@ export default function Add_User() {
         conf: "",
         address:"",
         country: "",
-        role:"admin"
+        role:""
       });
 
       const onChangeInput = (e) => {
@@ -67,10 +67,16 @@ export default function Add_User() {
               "Error",
               3000
             )}
+          else if (form.role == "") {
+            NotificationManager.error(
+              "Introduzca el rol",
+              "Error",
+              3000
+            )}
         else {
             await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
             .then(response=>{
-              NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
+              NotificationManager.success("Cuenta creada con éxito", "Sucesso", 2000);
               setTimeout(()=>{
                 router.replace("/admin/user/manager");
               },2000
@@ -192,6 +198,14 @@ export default function Add_User() {
                 />
               </section>
               <section>
+                <p>Rol :</p>
+                <select name="role" value={form.role} onChange={(e)=>onChangeInput(e)}>
+                  <option value=""></option>
+                  <option value="admin">Administrador</option>
+                  <option value="comercial">Comercial</option>
+                </select>
+              </section>
+              <section>
                 <p>Direccion :</p>
                 <input
                   name="address"
@@ -219,7 +233,14 @@ export default function Add_User() {
             margin-top: 10px;
             color: #000;
           }
-  
+          select{
+            margin-top: 7px;
+            margin-bottom: 7px;
+            padding: 10px 20px;
+            border: 1px solid #eee;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
+            width:200px;
+          }
           div {
             display: grid;
             place-content: center;
