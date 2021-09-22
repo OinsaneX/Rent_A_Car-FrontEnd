@@ -21,7 +21,7 @@ export default function WorkForm() {
       getIdUser()
     }, [])
 
-    function getIdUser(){
+    async function getIdUser(){
       await getUser(async(user)=>{
         if(user){
           setidUser(user._id)
