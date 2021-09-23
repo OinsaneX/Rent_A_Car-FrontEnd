@@ -12,7 +12,9 @@ import { useEffect } from "react";
 
 export default function Contract({rent,car,user}) {
     const router = useRouter();
- 
+    const [loading, setloading] = useState(false)
+
+
 
     const sendEmailConfirm =async()=>{
         await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{car,email:user.email,asunto:"Confirmar Renta",rent})
@@ -27,6 +29,12 @@ export default function Contract({rent,car,user}) {
         <>
         <NotificationContainer/>
         <div className="full">
+        {loading &&  <div className="loader">
+        <h2>
+               Se ha enviado un link de confirmacion a su correo
+            </h2>
+            <button>Enviar nuevamente</button>
+            </div>}
             <header>
             <h3>Detalles de la reserva</h3>
             <h4>Verifique toda la informacion antes de terminar la reserva ...Una vez concluido será enviado un email con un lnk para confirmar la reserva </h4>
@@ -361,6 +369,18 @@ El cliente pierde el importe pagado en su totalidad, incluyendo los días pendie
     }
     .red{
         color:red
+    }
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        opacity: 1;
+        display:grid;
+        place-content: center;
+        place-items: center;
     }
     h2{
         margin:0;
