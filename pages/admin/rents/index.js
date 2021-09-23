@@ -46,7 +46,7 @@ const [noactive, setnoactive] = useState([])
           <h2>Rentas activas</h2>
           <hr />
           <div className="list">
-              {actives.map(rent=>(
+              {actives.length < 1 ? <h3>No existe ninguna renta activa en el sistema</h3> :actives.map(rent=>(
                   <div className="card">
                       <div className="col">
                           <img src={rent.imageCar} alt="" />
@@ -58,8 +58,8 @@ const [noactive, setnoactive] = useState([])
                 </div>
                 <div className="col">
                 <h3>{`Lugar de recogida : ${rent.location}`}</h3>
-                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
-                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
+                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getUTCDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
+                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getUTCDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
                 </div>
                 <div className="col">
                 <h3>{`Cliente : ${rent.user_name}`}</h3>
@@ -88,8 +88,8 @@ const [noactive, setnoactive] = useState([])
                 </div>
                 <div className="col">
                 <h3>{`Lugar de recogida : ${rent.location}`}</h3>
-                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
-                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
+                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getUTCDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
+                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getUTCDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
                 </div>
                 <div className="col">
                 <h3>{`Cliente : ${rent.user_name}`}</h3>
@@ -105,7 +105,7 @@ const [noactive, setnoactive] = useState([])
           <h2>Rentas inactivas</h2>
 <hr />
           <div className="list">
-          {noactive.map(rent=>(
+          {noactive.length < 1 ? <h3>No existe ninguna renta inactiva en el sistema</h3> : noactive.map(rent=>(
                   <div className="card">
                       <div className="col">
                           <img src={rent.imageCar} alt="" />
@@ -117,8 +117,8 @@ const [noactive, setnoactive] = useState([])
                 </div>
                 <div className="col">
                 <h3>{`Lugar de recogida : ${rent.location}`}</h3>
-                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
-                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
+                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getUTCDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
+                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getUTCDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
                 </div>
                 <div className="col">
                 <h3>{`Cliente : ${rent.user_name}`}</h3>

@@ -5,10 +5,14 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+
 
 
 export default function Contract({rent,car,user}) {
     const router = useRouter();
+ 
 
     const sendEmailConfirm =async()=>{
         await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{car,email:user.email,asunto:"Confirmar Renta",rent})
@@ -42,8 +46,8 @@ export default function Contract({rent,car,user}) {
                 </div>
                 <div className="col">
                 <h3>{`Lugar de recogida : ${rent.location}`}</h3>
-                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
-                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
+                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getUTCDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
+                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getUTCDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
                 </div>
                 <div className="col flex1">
                 <h3>{`Nombre del Usuario : ${user.name}`}</h3>
