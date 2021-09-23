@@ -19,13 +19,13 @@ const [noactive, setnoactive] = useState([])
     .get("https://desolate-sea-14156.herokuapp.com/rent")
     .then((response) =>{
         response.data.forEach(rent => {
-            if (!rent.cancelated && rent.active){
+            if (!rent.cancelated && rent.active && rent.confirmed){
                 act.push(rent)
             }
             else if(rent.cancelated){
                canc.push(rent)
             }
-            else if(!rent.active){
+            else if(!rent.active || !rent.confirmed){
                 noact.push(rent)
             }
         });
@@ -122,6 +122,7 @@ const [noactive, setnoactive] = useState([])
                 </div>
                 <div className="col">
                 <h3>{`Cliente : ${rent.user_name}`}</h3>
+                <h3>{!rent.active ? 'El usuario borró su cuenta' : 'El usuario no confirmó la renta'}</h3>
                </div>
                 <div className="buttons">
                     <Link href={`/admin/rents/${rent._id}`}><a>Ver Detalles</a></Link>
