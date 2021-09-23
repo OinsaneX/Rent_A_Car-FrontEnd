@@ -41,8 +41,8 @@ export default function Details({rent,car,user}) {
                 </div>
                 <div className="col">
                 <h3>{`Lugar de recogida : ${rent.location}`}</h3>
-                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
-                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
+                <h3>{`Fecha de recogida : ${new Date(rent.pickUp).getUTCDate()}/${new Date(rent.pickUp).getMonth()+1}/${new Date(rent.pickUp).getFullYear()}`}</h3>
+                <h3>{`Fecha de entrega : ${new Date(rent.dropOff).getUTCDate()}/${new Date(rent.dropOff).getMonth()+1}/${new Date(rent.dropOff).getFullYear()}`}</h3>
                 <h3>{`Hora de recogida : ${rent.pickHour <12 ? `${rent.pickHour} AM` : `${rent.pickHour} PM`}`}</h3>
                 <h3>{`Hora de Entrega : ${rent.dropHour <12 ? `${rent.dropHour} AM` : `${rent.dropHour} PM`}`}</h3>
                 </div>
