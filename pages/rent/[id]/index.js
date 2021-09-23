@@ -5,8 +5,8 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import Link from 'next/link'
 
 
 
@@ -18,7 +18,11 @@ export default function Contract({rent,car,user}) {
 
     const sendEmailConfirm =async()=>{
         await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/confirm",{car,email:user.email,asunto:"Confirmar Renta",rent})
-        .then(res=> router.replace("/rent/emailSend"))
+        .then(res=> {
+            setloading(true)
+            NotificationManager.success("Email enviado", "Sucesso", 2000);
+
+        })
       
            
           
@@ -33,7 +37,13 @@ export default function Contract({rent,car,user}) {
         <h2>
                Se ha enviado un link de confirmacion a su correo
             </h2>
-            <button>Enviar nuevamente</button>
+            <Link href="/rent">
+            <a>
+               <h4>Aceptar</h4>
+            </a></Link>
+    
+            <label onClick={()=>sendEmailConfirm()}> Enviar de nuevo </label>
+
             </div>}
             <header>
             <h3>Detalles de la reserva</h3>
@@ -367,6 +377,15 @@ El cliente pierde el importe pagado en su totalidad, incluyendo los días pendie
         box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
 
     }
+    a,label{
+margin:10px;
+text-align: center;
+padding:14px 20px;
+background-color: #000;
+color: #fff;
+box-shadow: 0px 0px 10px rgba(0, 0, 0,1);
+transition:all ease-in 0.6s;
+}
     .red{
         color:red
     }
@@ -381,6 +400,7 @@ El cliente pierde el importe pagado en su totalidad, incluyendo los días pendie
         display:grid;
         place-content: center;
         place-items: center;
+        background-color: #fff;
     }
     h2{
         margin:0;
