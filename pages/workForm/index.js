@@ -12,7 +12,7 @@ import { useUser } from "../../hooks/UserContext";
 
 export default function WorkForm() {
   const router = useRouter()
-        const [driverForm, setdriverForm] = useState({name:"",email:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:null,licenseUrl:""})
+        const [driverForm, setdriverForm] = useState({name:"",email:"",curriculum:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:null,licenseUrl:""})
         const [loading, setloading] = useState(undefined)
         const {getUser} = useUser()
         const [idUser, setidUser] = useState(null)
@@ -103,14 +103,14 @@ export default function WorkForm() {
               3000
             )}
         else {
-            await axios.post("https://desolate-sea-14156.herokuapp.com/driverForm",driverForm)
+            await axios.post("https://desolate-sea-14156.herokuapp.com/driverForm",{...driverForm,idUser})
             .then(async response=>{
                 NotificationManager.success("Su solicitud será revisada y le conctactaremos por email", "Solicitud Enviada", 8000);
                 await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/sendNotificationForm")
                 setdriverForm({name:"",email:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:null,licenseUrl:"",idUser})
                 setTimeout(()=>{
                   router.replace("/rent");
-                },8000
+                },4000
                  
                 )
               })
@@ -154,19 +154,19 @@ export default function WorkForm() {
 					<form>
                     <div className="col">
                         <h5>Nombre :</h5>
-                    <input type="text" name="name" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="text" value={driverForm.name} name="name" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>Email :</h5>
-                    <input type="text" name="email" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="text" value={driverForm.email} name="email" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>CI :</h5>
-                    <input type="text" name="identity" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="text" value={driverForm.identity} name="identity" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>Teléfono :</h5>
-                    <input type="text" name="phone" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="text" value={driverForm.phone} name="phone" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>Nacionalidad :</h5>
@@ -174,15 +174,15 @@ export default function WorkForm() {
                     </div>
                     <div className="col">
                         <h5>Dirección :</h5>
-                    <input type="text" name="address" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="text" value={driverForm.address} name="address" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>Años de Experiencia :</h5>
-                    <input type="number" name="experience_years" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="number" value={driverForm.experience_years} name="experience_years" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>Licencia :</h5>
-                    <input type="text" name="license" onChange={(e)=>onChangeInput(e)}/>
+                    <input type="text" value={driverForm.license} name="license" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="col">
                         <h5>Fecha de Validación :</h5>
@@ -195,7 +195,7 @@ export default function WorkForm() {
             />                    </div>
                     <div className="curriculum">
                         <h5>Currículo :</h5>
-                    <textarea  name="curriculum" onChange={(e)=>onChangeInput(e)}/>
+                    <textarea value={driverForm.curriculum}  name="curriculum" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="file">
                         <h5>Foto de la licencia de conducción :</h5>

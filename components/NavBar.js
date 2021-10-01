@@ -58,7 +58,8 @@ export default function NavBar() {
               <li><Link href="/profile"><a>Perfil</a></Link></li>
               <li><Link href="/services"><a>Servicios</a></Link></li>
 
-              {user.role=="admin" && <li><Link href="/admin/car_manager"><a>Administración</a></Link></li>}
+              {user.role=="admin" && <li><Link href="/admin/user/manager"><a>Administración</a></Link></li>}
+              {user.role=="comercial" && <li><Link href="/admin/car_manager"><a>Comercial</a></Link></li>}
               <li onClick={()=>logout()}>Salir</li>
                 </ul>
           }

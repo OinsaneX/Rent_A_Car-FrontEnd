@@ -20,7 +20,7 @@ export default function workFormAdmin() {
     
     <main>
     {forms.map(form =>(
-        <div className="card">
+        <div key={form._id} className="card">
           <header>
           <h2>{form.name}</h2>
 
