@@ -19,7 +19,7 @@ export default function index() {
   const router = useRouter();
   const [loading, setloading] = useState(false)
   const [carList, setcarList] = useState([])
-  const [rentData, setrentData] = useState({location:null,pickUp:today,dropOff:today,pickHour:null,dropHour:null})
+  const [rentData, setrentData] = useState({location:null,pickUp:today,dropOff:today,pickHour:null,dropHour:null,driverReq:false,driver_Id:null,driver_name:null})
   const {user} = useUser()
 
   useEffect(() => {
@@ -73,13 +73,44 @@ export default function index() {
      )
    }
    else{
+
+
+
     setloading(true)
+
+    if(rentData.driverReq)
+   {
+    await axios.post("https://desolate-sea-14156.herokuapp.com/rent/searchDriversAvailable",rentData)
+    .then(async(res)=>{
+      if(res.data){
+        console.log(res.data.name)
+        await axios.post("https://desolate-sea-14156.herokuapp.com/rent",{...rentData,driver_Id:res.data._id,driver_name:res.data.name})
+        .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
+        .catch(error=>setloading(false))
+      }
+      else{
+        NotificationManager.error("No hay choferes disponibles para esa fecha",
+        "Error",
+        4000)
+
+        setloading(false)
+      }
+    })
+ .catch(err=>console.log(err))
+   }
+   else{
     await axios.post("https://desolate-sea-14156.herokuapp.com/rent",rentData)
     .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
     .catch(error=>setloading(false))
    }
+   }
   
  }
+
+
+  const checkHandler = (e)=>{
+    setrentData({...rentData, [e.target.name]: e.target.checked})
+  }
 
   return (
     <>
@@ -166,6 +197,13 @@ export default function index() {
   <option value="23">11 PM</option>
 </select>
         </div>
+        <div className="inp">
+        <span>
+         Requiere Chofer :
+        </span>
+        <input type="checkbox" name="driverReq"  onChange={(e)=> checkHandler(e)}/>
+        </div>
+
         </div>
         <div className="search">
         <button onClick={()=>onSubmit()}>
@@ -293,6 +331,9 @@ export default function index() {
 
         }
         .inp{
+          display:flex;
+          flex-direction:column;
+          align-items: center;
           width:240px;
           margin:10px 20px;
         }
@@ -328,7 +369,7 @@ export default function index() {
           place-items:center;
           
         }
-        input{
+        input[type=text],input[type=date]{
           margin:5px 6px;
           width:248px;
         border:1px solid #eee;
@@ -336,7 +377,7 @@ export default function index() {
         box-shadow: 0px 0px 4px rgba(0, 0, 0,1);
 
         }
-        
+       
         @media only screen and (max-width: 800px) {
           .search{
        display:flex;

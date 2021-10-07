@@ -68,18 +68,27 @@ export default function Home() {
     else {
         await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
         .then(async response=>{
-          await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
-            username: form.username,
-            email:form.email,
-            asunto:"Bienvenido a Rent_A_Car Cuba",
-            mensaje:"No responda a este correo"
-          })
-          NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
-          setTimeout(()=>{
-            router.replace("/login");
-          },2000
-           
-          )
+          if(response.data.errEmail){
+            NotificationManager.error(
+              "Ya existe una cuenta con ese correo",
+              "Error",
+              3000
+            )
+          }else{
+            await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
+              username: form.username,
+              email:form.email,
+              asunto:"Bienvenido a Rent_A_Car Cuba",
+              mensaje:"No responda a este correo"
+            })
+            NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
+            setTimeout(()=>{
+              router.replace("/login");
+            },2000
+             
+            )
+          }
+        
         })
      
      

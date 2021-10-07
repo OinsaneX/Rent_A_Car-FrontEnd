@@ -19,7 +19,7 @@ export default function AdminNav() {
   
   
     const logout = async()=>{
-      await axios.delete(`https://desolate-sea-14156.herokuapp.com/userlogged/${user._id}`)
+     user && await axios.delete(`https://desolate-sea-14156.herokuapp.com/userlogged/${user._id}`)
       localStorage.removeItem("token")
       router.replace("/login")
     }

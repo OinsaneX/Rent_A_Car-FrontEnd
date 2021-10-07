@@ -16,6 +16,7 @@ export default function Profile() {
     const [user, setUser] = useState(null)
     const {getUser} = useUser()
     const [rents, setrents] = useState([])
+    const [works, setworks] = useState([])
   
     useEffect(() => {
       getUser(async(res)=>{
@@ -25,6 +26,10 @@ export default function Profile() {
         else{
             setUser(res)
             getRents(res._id)
+            if(res.role=="driver"){
+                await axios.get(`https://desolate-sea-14156.herokuapp.com/rent/getRentsByDriver/${res._id}`)
+                .then(response=> setworks(response.data))
+            }
         }
      })
     }, [])
@@ -91,7 +96,7 @@ export default function Profile() {
            </div>}
         </header>
 
-        <main>
+       {user && user.role=="client" &&  <main>
             <h2>
                 Tus reservas : 
             </h2>
@@ -123,7 +128,37 @@ export default function Profile() {
                </div>
             ))}
             </section>
-        </main>
+        </main>}
+
+
+        {user && user.role=="driver" && <main>
+        <h2>
+                Tus trabajos pendientes : 
+            </h2>
+            <section>
+                {works.map((work)=>(
+                   <div className="card">
+                       <div className="info">
+                   <div className="col">
+                <h3>{`Precio total : ${work.price} $`}</h3>
+                <h3>{`Dias de reserva : ${work.days} `}</h3>
+
+                </div>
+                <div className="col">
+                <h3>{`Lugar de recogida : ${work.location}`}</h3>
+                <h3>{`Fecha de recogida : ${new Date(work.pickUp).getDate()}/${new Date(work.pickUp).getMonth()+1}/${new Date(work.pickUp).getFullYear()} a las ${work.pickHour} ${work.pickHour < 12 ? 'AM' : 'PM'}`}</h3>
+                <h3>{`Fecha de entrega : ${new Date(work.dropOff).getDate()}/${new Date(work.dropOff).getMonth()+1}/${new Date(work.dropOff).getFullYear()} a las ${work.dropHour} ${work.dropHour < 12 ? 'AM' : 'PM'}`}</h3>
+                </div>
+                <div className="col flex1">
+                <h3>{`Cliente : ${user.name}`}</h3>
+                <h3>{`La renta ${!work.confirmed ? "no" : ""} ha sido confirmada`}</h3>
+                </div>
+
+                   </div>
+                        </div>
+                ))}
+            </section>
+            </main>}
            
           <style jsx>
               {`

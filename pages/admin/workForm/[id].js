@@ -1,7 +1,12 @@
 import axios from "axios";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import "react-notifications/lib/notifications.css";
 
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 function formWork({dataForm}) {
 
     function acceptButton() {
@@ -14,6 +19,7 @@ function formWork({dataForm}) {
                 onClick: async() => {
                     await axios.put(`https://desolate-sea-14156.herokuapp.com/user/convertToDriver/${dataForm.idUser}`)
                     .then(async() => {
+                        await axios.delete(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkConfirmed`,{name:dataForm.name,email:dataForm.email})
                         await axios.delete(`https://desolate-sea-14156.herokuapp.com/driverForm/${dataForm._id}`)
                         NotificationManager.success("Usuario aceptado como chofer","Éxito",2000)
                     })
@@ -21,11 +27,38 @@ function formWork({dataForm}) {
               },
               {
                 label: 'No',
-                onClick: () => {}
+                onClick: () => {  
+                   
+            }
               }
             ]
           })
         
+    }
+
+    function rejectConfirm(){
+        confirmAlert({
+            title: 'Confirmar',
+            message: 'Estas seguro que deseas rechazar a este usuario como un nuevo chofer?',
+            buttons: [
+              {
+                label: 'Si',
+                onClick: async() => {
+                   
+                        await axios.delete(`https://desolate-sea-14156.herokuapp.com/driverForm/${dataForm._id}`)
+                        await axios.delete(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkCanceled`,{name:dataForm.name,email:dataForm.email})
+                        NotificationManager.success("Peticion eliminada ","Éxito",2000)
+                    
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => {  
+                   
+            }
+              }
+            ]
+          })
     }
 
 
@@ -58,7 +91,7 @@ function formWork({dataForm}) {
 
 
             <div className="buttons">
-            <button className="cancel" > Rechazar </button>
+            <button className="cancel" onClick={rejectConfirm}> Rechazar </button>
             <button className="accept" onClick={acceptButton}> Aceptar </button>
             </div>
 
