@@ -45,18 +45,27 @@ export default function AddCar() {
 
       const addNewCar = async() => {
           console.log(carData)
-
-          await axios.post("https://desolate-sea-14156.herokuapp.com/car",carData)
-          .then(response=> {
-            resetData()  
-            NotificationManager.success("Se ha añadido el auto al sistema","Éxito",2000)
-            
-        })
-        .catch((error) => {NotificationManager.error(
-            "A veces ocurre este error",
-            "Error",
-            3000
-          )})
+            if(brand!=''||model!=''||description!=''||imageUrl!=''||price_per_day==0||ports==0 || capacity==0){
+                NotificationManager.error(
+                    "Rellene todos los datos correctamente",
+                    "Error",
+                    3000
+                  )
+            }
+            else{
+                await axios.post("https://desolate-sea-14156.herokuapp.com/car",carData)
+                .then(response=> {
+                  resetData()  
+                  NotificationManager.success("Se ha añadido el auto al sistema","Éxito",2000)
+                  
+              })
+              .catch((error) => {NotificationManager.error(
+                  "Error de red",
+                  "Error",
+                  3000
+                )})
+            }
+        
       }
 
 
