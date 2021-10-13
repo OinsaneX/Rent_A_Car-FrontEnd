@@ -9,10 +9,11 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { useUser } from "../../hooks/UserContext";
+import {ValidateCI,ValidateLicenseExp} from '../../utils/Validation'
 
 export default function WorkForm() {
   const router = useRouter()
-        const [driverForm, setdriverForm] = useState({name:"",email:"",curriculum:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:null,licenseUrl:""})
+        const [driverForm, setdriverForm] = useState({name:"",email:"",curriculum:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:"",licenseUrl:""})
         const [loading, setloading] = useState(undefined)
         const {getUser} = useUser()
         const [idUser, setidUser] = useState(null)
@@ -74,7 +75,7 @@ export default function WorkForm() {
           );
         } else if (driverForm.email.indexOf("@") == -1) {
           NotificationManager.error("Introduzca un email válido", "Error", 3000);
-        } else if (countDigits(driverForm.identity) < 11) {
+        } else if (countDigits(driverForm.identity) < 11 || !ValidateCI(driverForm.identity)) {
           NotificationManager.error("Introduzca un CI válido", "Error", 3000);
         } else if (countDigits(driverForm.phone) < 8) {
           NotificationManager.error(
@@ -96,6 +97,14 @@ export default function WorkForm() {
               "Error",
               3000
             )}
+              else if (!ValidateLicenseExp(driverForm.licenseValidation)){
+                NotificationManager.error(
+                  "La licencia está incorrecta o vencida",
+                  "Error",
+                  3000
+                )
+              }
+
           else if (driverForm.licenseUrl == "") {
             NotificationManager.error(
               "Suba la foto de su licencia",
@@ -162,7 +171,13 @@ export default function WorkForm() {
                     </div>
                     <div className="col">
                         <h5>CI :</h5>
-                    <input type="text" value={driverForm.identity} name="identity" onChange={(e)=>onChangeInput(e)}/>
+                        <InputMask
+                mask="99999999999"
+                name="identity"
+                value={driverForm.identity}
+                onChange={(e) => onChangeInput(e)}
+                placeholder="XXXXXXXXXXX"
+              />
                     </div>
                     <div className="col">
                         <h5>Teléfono :</h5>
@@ -182,7 +197,14 @@ export default function WorkForm() {
                     </div>
                     <div className="col">
                         <h5>Licencia :</h5>
-                    <input type="text" value={driverForm.license} name="license" onChange={(e)=>onChangeInput(e)}/>
+                        <InputMask
+              mask="A9999999"
+              name="license" 
+              value={driverForm.license}
+              onChange={(e)=>onChangeInput(e)}
+              placeholder="A99999999"
+            /> 
+                    
                     </div>
                     <div className="col">
                         <h5>Fecha de Validación :</h5>
@@ -194,7 +216,7 @@ export default function WorkForm() {
               placeholder="MM/AAAA"
             />                    </div>
                     <div className="curriculum">
-                        <h5>Currículo :</h5>
+                        <h5>Currículum :</h5>
                     <textarea value={driverForm.curriculum}  name="curriculum" onChange={(e)=>onChangeInput(e)}/>
                     </div>
                     <div className="file">

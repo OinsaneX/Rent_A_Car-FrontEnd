@@ -19,7 +19,7 @@ function formWork({dataForm}) {
                 onClick: async() => {
                     await axios.put(`https://desolate-sea-14156.herokuapp.com/user/convertToDriver/${dataForm.idUser}`)
                     .then(async() => {
-                        await axios.delete(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkConfirmed`,{name:dataForm.name,email:dataForm.email})
+                        await axios.post(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkConfirmed`,{name:dataForm.name,email:dataForm.email})
                         await axios.delete(`https://desolate-sea-14156.herokuapp.com/driverForm/${dataForm._id}`)
                         NotificationManager.success("Usuario aceptado como chofer","Éxito",2000)
                     })
