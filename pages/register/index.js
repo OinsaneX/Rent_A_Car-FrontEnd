@@ -90,6 +90,14 @@ export default function Home() {
             )
           }
           else{
+        
+            await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
+              username: form.username,
+              email:form.email,
+              id:response.data._id,
+              asunto:"Bienvenido a Rent_A_Car Cuba",
+              mensaje:"No responda a este correo"
+            })
             setform( {name: "",
             username:"",
             email:"",
@@ -101,13 +109,6 @@ export default function Home() {
             address:"",
             country: "",
             pasport:""})
-            await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
-              username: form.username,
-              email:form.email,
-              id:response.data._id,
-              asunto:"Bienvenido a Rent_A_Car Cuba",
-              mensaje:"No responda a este correo"
-            })
             NotificationManager.success("Correo con link de confirmación enviado a su correo", "Sucesso", 2000);
             setTimeout(()=>{
               router.replace("/login");

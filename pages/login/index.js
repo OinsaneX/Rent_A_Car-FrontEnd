@@ -51,6 +51,7 @@ export default function Home() {
                 "Error",
                 3000
               );
+              setloading(false);
             }else{
               await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
               .then(res => {

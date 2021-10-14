@@ -1,7 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 
-export default function Confirm({id}) {
+export default function Confirm() {
 
 
   
