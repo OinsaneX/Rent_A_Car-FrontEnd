@@ -90,6 +90,17 @@ export default function Home() {
             )
           }
           else{
+            setform( {name: "",
+            username:"",
+            email:"",
+            identity: "",
+            nacionality: "",
+            phone: "",
+            password: "",
+            conf: "",
+            address:"",
+            country: "",
+            pasport:""})
             await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
               username: form.username,
               email:form.email,
@@ -97,7 +108,7 @@ export default function Home() {
               asunto:"Bienvenido a Rent_A_Car Cuba",
               mensaje:"No responda a este correo"
             })
-            NotificationManager.success("Su cuenta fue creada", "Sucesso", 2000);
+            NotificationManager.success("Correo con link de confirmación enviado a su correo", "Sucesso", 2000);
             setTimeout(()=>{
               router.replace("/login");
             },2000
