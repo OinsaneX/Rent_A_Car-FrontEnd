@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import SelectCountry from "../../components/SelectCountry";
+import {ValidateCI} from '../../utils/Validation'
 
 export default function Home() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function Home() {
       );
     } else if (form.email.indexOf("@") == -1) {
       NotificationManager.error("Introduzca un email válido", "Error", 3000);
-    } else if (countDigits(form.identity) < 11) {
+    } else if (countDigits(form.identity) < 11 || !ValidateCI(form.identity)) {
       NotificationManager.error("Introduzca un CI válido", "Error", 3000);
     } else if (countDigits(form.phone) < 8) {
       NotificationManager.error(
@@ -74,7 +75,21 @@ export default function Home() {
               "Error",
               3000
             )
-          }else{
+          }else if(response.data.errUser){
+            NotificationManager.error(
+              "Ya existe una cuenta con ese nombre de usuario",
+              "Error",
+              3000
+            )
+          }
+          else if(response.data.errIdentity){
+            NotificationManager.error(
+              "Ya existe una cuenta con ese documento de identidad",
+              "Error",
+              3000
+            )
+          }
+          else{
             await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
               username: form.username,
               email:form.email,

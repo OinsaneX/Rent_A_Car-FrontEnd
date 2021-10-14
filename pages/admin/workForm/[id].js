@@ -7,7 +7,10 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import { useRouter } from "next/router";
 function formWork({dataForm}) {
+
+  const router = useRouter();
 
     function acceptButton() {
         confirmAlert({
@@ -19,9 +22,15 @@ function formWork({dataForm}) {
                 onClick: async() => {
                     await axios.put(`https://desolate-sea-14156.herokuapp.com/user/convertToDriver/${dataForm.idUser}`)
                     .then(async() => {
+                      await axios.delete(`https://desolate-sea-14156.herokuapp.com/driverForm/${dataForm._id}`)
+
                         await axios.post(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkConfirmed`,{name:dataForm.name,email:dataForm.email})
-                        await axios.delete(`https://desolate-sea-14156.herokuapp.com/driverForm/${dataForm._id}`)
                         NotificationManager.success("Usuario aceptado como chofer","Éxito",2000)
+                        setTimeout(()=>{
+                          router.replace("/admin/workForm");
+                        },1000
+                         
+                        )
                     })
                 }
               },
@@ -46,9 +55,12 @@ function formWork({dataForm}) {
                 onClick: async() => {
                    
                         await axios.delete(`https://desolate-sea-14156.herokuapp.com/driverForm/${dataForm._id}`)
-                        await axios.delete(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkCanceled`,{name:dataForm.name,email:dataForm.email})
+                        await axios.post(`https://desolate-sea-14156.herokuapp.com/sendMail/sendEmailWorkCanceled`,{name:dataForm.name,email:dataForm.email})
                         NotificationManager.success("Peticion eliminada ","Éxito",2000)
-                    
+                        setTimeout(()=>{
+                          router.replace("/admin/workForm");
+                        },1000
+                        )
                 }
               },
               {

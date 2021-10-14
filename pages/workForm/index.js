@@ -13,10 +13,10 @@ import {ValidateCI,ValidateLicenseExp} from '../../utils/Validation'
 
 export default function WorkForm() {
   const router = useRouter()
-        const [driverForm, setdriverForm] = useState({name:"",email:"",curriculum:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:"",licenseUrl:""})
+        const [driverForm, setdriverForm] = useState({experience_years:"",curriculum:"",license:"",licenseValidation:"",licenseUrl:""})
         const [loading, setloading] = useState(undefined)
         const {getUser} = useUser()
-        const [idUser, setidUser] = useState(null)
+        const [userData, setUserData] = useState(null)
 
     useEffect(() => {
       getIdUser()
@@ -25,10 +25,10 @@ export default function WorkForm() {
     async function getIdUser(){
       await getUser(async(user)=>{
         if(user){
-          setidUser(user._id)
+          setUserData(user)
         }
         else{
-            router.replace('/rent')
+            router.replace('/login')
         }
         
      })
@@ -67,37 +67,8 @@ export default function WorkForm() {
 
 
       const onSubmit = async() => {
-        if (driverForm.name == "") {
-          NotificationManager.error(
-            "Introduzca el nombre de usuario",
-            "Error",
-            3000
-          );
-        } else if (driverForm.email.indexOf("@") == -1) {
-          NotificationManager.error("Introduzca un email válido", "Error", 3000);
-        } else if (countDigits(driverForm.identity) < 11 || !ValidateCI(driverForm.identity)) {
-          NotificationManager.error("Introduzca un CI válido", "Error", 3000);
-        } else if (countDigits(driverForm.phone) < 8) {
-          NotificationManager.error(
-            "Introduzca un Número de celular válido",
-            "Error",
-            3000
-          );
-        } 
-        else if (driverForm.nacionality == "") {
-          NotificationManager.error(
-            "Introduzca su nacionalidad",
-            "Error",
-            3000
-          )}
-      
-          else if (driverForm.address == "") {
-            NotificationManager.error(
-              "Introduzca su direccion",
-              "Error",
-              3000
-            )}
-              else if (!ValidateLicenseExp(driverForm.licenseValidation)){
+       
+           if (!ValidateLicenseExp(driverForm.licenseValidation)){
                 NotificationManager.error(
                   "La licencia está incorrecta o vencida",
                   "Error",
@@ -112,11 +83,11 @@ export default function WorkForm() {
               3000
             )}
         else {
-            await axios.post("https://desolate-sea-14156.herokuapp.com/driverForm",{...driverForm,idUser})
+            await axios.post("http://localhost:4000/driverForm",{...userData,...driverForm,idUser:userData._id})
             .then(async response=>{
                 NotificationManager.success("Su solicitud será revisada y le conctactaremos por email", "Solicitud Enviada", 8000);
                 await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail/sendNotificationForm")
-                setdriverForm({name:"",email:"",identity:"",phone:"",nacionality:"",country:"",address:"",role:"driver",pasport:"",experience_years:"",license:"",licenseValidation:null,licenseUrl:"",idUser})
+                setdriverForm({license:"",licenseValidation:null,licenseUrl:"",idUser:userData._id})
                 setTimeout(()=>{
                   router.replace("/rent");
                 },4000
@@ -161,36 +132,7 @@ export default function WorkForm() {
 				</header>
 				<section>
 					<form>
-                    <div className="col">
-                        <h5>Nombre :</h5>
-                    <input type="text" value={driverForm.name} name="name" onChange={(e)=>onChangeInput(e)}/>
-                    </div>
-                    <div className="col">
-                        <h5>Email :</h5>
-                    <input type="text" value={driverForm.email} name="email" onChange={(e)=>onChangeInput(e)}/>
-                    </div>
-                    <div className="col">
-                        <h5>CI :</h5>
-                        <InputMask
-                mask="99999999999"
-                name="identity"
-                value={driverForm.identity}
-                onChange={(e) => onChangeInput(e)}
-                placeholder="XXXXXXXXXXX"
-              />
-                    </div>
-                    <div className="col">
-                        <h5>Teléfono :</h5>
-                    <input type="text" value={driverForm.phone} name="phone" onChange={(e)=>onChangeInput(e)}/>
-                    </div>
-                    <div className="col">
-                        <h5>Nacionalidad :</h5>
-                        <SelectCountry name="nacionality" country={driverForm.nacionality} onChangeInput={onChangeInput}/>
-                    </div>
-                    <div className="col">
-                        <h5>Dirección :</h5>
-                    <input type="text" value={driverForm.address} name="address" onChange={(e)=>onChangeInput(e)}/>
-                    </div>
+                   
                     <div className="col">
                         <h5>Años de Experiencia :</h5>
                     <input type="number" value={driverForm.experience_years} name="experience_years" onChange={(e)=>onChangeInput(e)}/>

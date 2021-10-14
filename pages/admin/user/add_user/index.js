@@ -8,6 +8,7 @@ import {
 } from "react-notifications";
 import { useState } from "react";
 import axios from "axios";
+import { ValidateCI } from "../../../../utils/Validation";
 
 export default function Add_User() {
     const router = useRouter()
@@ -38,7 +39,7 @@ export default function Add_User() {
           );
         } else if (form.email.indexOf("@") == -1) {
           NotificationManager.error("Introduzca un email válido", "Error", 3000);
-        } else if (countDigits(form.identity) < 11) {
+        } else if (countDigits(form.identity) < 11 || !ValidateCI(form.identity)) {
           NotificationManager.error("Introduzca un CI válido", "Error", 3000);
         } else if (countDigits(form.phone) < 8) {
           NotificationManager.error(

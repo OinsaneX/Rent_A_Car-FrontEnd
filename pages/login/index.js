@@ -45,10 +45,20 @@ export default function Home() {
         await axios.post("https://desolate-sea-14156.herokuapp.com/user/login",form)
         .then(async response => {
           if(response.data){
+
             await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
             .then(res => {
               localStorage.setItem("token",res.data.token)
-              router.replace("/rent");
+              if(response.data.role=="admin"){
+                router.replace("/admin/user/manager");
+              }
+              else if(response.data.role=="comercial"){
+                router.replace("/admin/car_manager");
+              }
+              else{
+                router.replace("/rent");
+
+              }
             })
           }
           else{

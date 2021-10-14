@@ -15,10 +15,8 @@ export const AuthProvider = ({ children }) => {
   const getUser = async (callback) => {
     const idToken = localStorage.getItem("token");
     if (idToken) {
-        console.log(idToken)
       await axios.get(`https://desolate-sea-14156.herokuapp.com/userlogged/${idToken}`)
       .then((response) =>{
-        console.log(response.data)
          if( response.data){
             setUser(response.data)
             callback(response.data)
