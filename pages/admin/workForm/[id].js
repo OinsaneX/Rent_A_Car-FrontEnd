@@ -76,6 +76,8 @@ function formWork({dataForm}) {
 
     return (
         <div>
+                         <NotificationContainer />
+
           <main>
             <div className="col">
             <p>{`Nombre : ${dataForm.name}`}</p>

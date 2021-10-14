@@ -6,7 +6,7 @@ import { NotificationManager,NotificationContainer } from 'react-notifications';
 import AdminNav from '../../../../components/AdminNav'
 export default function AddCar() {
 
-    const [carData, setcarData] = useState({brand:'',model:'',description:'',imageUrl:'',price_per_day:0,ports:0,type:'Normal',transmission:'Manual',capacity:0,air:null})
+    const [carData, setcarData] = useState({brand:'',model:'',description:'',registration:'',imageUrl:'',price_per_day:0,ports:0,type:'Normal',transmission:'Manual',capacity:0,air:null})
     const [loading, setloading] = useState(null)
 
 
@@ -84,6 +84,7 @@ export default function AddCar() {
 
                         <input type="text" name="brand" value={carData.brand} onChange={(e)=>onWrite(e)} placeholder="Marca"/>
                         <input type="text" name="model" value={carData.model} onChange={(e)=>onWrite(e)} placeholder="Modelo"/>
+                        <input type="text" name="registration" value={carData.registration} onChange={(e)=>onWrite(e)} placeholder="Matrícula"/>
                         <h4>Descripción :</h4>
                         <div className="txtarea">
                         <textarea name="description" value={carData.description} onChange={(e)=>onWrite(e)} id="" ></textarea>
