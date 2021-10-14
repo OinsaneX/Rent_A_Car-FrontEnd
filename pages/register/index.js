@@ -28,6 +28,7 @@ export default function Home() {
     pasport:""
   });
   const onSubmit = async(e) => {
+    console.log(form.pasport.includes("_"))
     e.preventDefault();
     if (form.name == "") {
       NotificationManager.error(
@@ -37,9 +38,19 @@ export default function Home() {
       );
     } else if (form.email.indexOf("@") == -1) {
       NotificationManager.error("Introduzca un email válido", "Error", 3000);
-    } else if (countDigits(form.identity) < 11 || !ValidateCI(form.identity)) {
-      NotificationManager.error("Introduzca un CI válido", "Error", 3000);
-    } else if (countDigits(form.phone) < 8) {
+    }
+    else if(form.nacionality == "Cuba" && (countDigits(form.identity) < 11 || !ValidateCI(form.identity))){
+      
+        NotificationManager.error("Introduzca un CI válido", "Error", 3000);
+    }
+     else if(form.nacionality != "Cuba" && form.pasport.includes("_")){
+       
+          NotificationManager.error("Introduzca un pasaporte válido", "Error", 3000);
+
+        
+    }
+
+     else if (countDigits(form.phone) < 8) {
       NotificationManager.error(
         "Introduzca un Número de celular válido",
         "Error",
