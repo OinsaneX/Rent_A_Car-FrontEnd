@@ -80,13 +80,7 @@ export default function Home() {
     else {
         await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
         .then(async response=>{
-          if(response.data.errEmail){
-            NotificationManager.error(
-              "Ya existe una cuenta con ese correo",
-              "Error",
-              3000
-            )
-          }else if(response.data.errUser){
+        if(response.data.errUser){
             NotificationManager.error(
               "Ya existe una cuenta con ese nombre de usuario",
               "Error",
