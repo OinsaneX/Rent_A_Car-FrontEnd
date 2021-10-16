@@ -16,7 +16,7 @@ export default function Add_User() {
         name: "",
         username:"",
         identity: "",
-        nacionality: "",
+        nacionality: "Cuba",
         phone: "",
         password: "",
         conf: "",
@@ -50,12 +50,7 @@ export default function Add_User() {
         } else if (form.password != form.conf) {
           NotificationManager.error("La contraseña no coincide", "Error", 3000);
         }
-        else if (form.nacionality == "") {
-          NotificationManager.error(
-            "Introduzca su nacionalidad",
-            "Error",
-            3000
-          )}
+       
         else if (form.country == "") {
           NotificationManager.error(
             "Introduzca su pais de residencia",
@@ -178,16 +173,7 @@ export default function Add_User() {
                   placeholder="Confirmar Contraseña"
                 />
               </section>
-              <section>
-                <p>Nacionalidad :</p>
-                <input
-                  name="nacionality"
-                  value={form.nacionality}
-                  onChange={(e) => onChangeInput(e)}
-                  type="text"
-                  placeholder="Nacionalidad"
-                />
-              </section>
+             
               <section>
                 <p>Pais :</p>
                 <input

@@ -155,6 +155,36 @@ export default function UserManager({users}) {
                    </tbody>
                     </table>
                 </section>
+                <hr />
+                <section>
+                    <h2>Coferes :</h2>
+                    <table>
+                    <thead>
+                    <tr>
+                        <th><p>Nombre</p></th>
+                        <th><p>Usuario</p></th>
+                        <th><p>Email</p></th>
+                        <th><p>CI</p></th>
+                        <th><p>Pais</p></th>
+                        <th><p>Opciones</p></th>
+
+                    </tr>
+                    </thead>
+                   <tbody>
+                   {userList.map((user)=>(
+                        user.role=="driver" && <tr key={user._id}>
+                            <td data-col-title="Nombre"><p>{user.name}</p></td>
+                         <td data-col-title="Usuario"><p>{user.username}</p></td>
+                         <td data-col-title="Email"><p>{user.email}</p></td>
+                         <td data-col-title="CI"><p>{user.identity}</p></td>
+                         <td data-col-title="Pais"><p>{user.country}</p></td>
+                         <td data-col-title="Opciones" className="flex"><label onClick={()=>deleteUser(user._id)}><Delete/></label> <label><Edit/></label></td>
+
+                         </tr>
+                    ))}
+                   </tbody>
+                    </table>
+                </section>
 
 
             </main>

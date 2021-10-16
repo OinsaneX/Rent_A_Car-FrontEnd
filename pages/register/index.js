@@ -95,7 +95,7 @@ export default function Home() {
             )
           }
           else{
-        
+            console.log(response.data._id)
             await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
               username: form.username,
               email:form.email,
