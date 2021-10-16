@@ -71,6 +71,7 @@ export default function Contract({rent,car,user}) {
                 <h3>{`Nombre del Usuario : ${user.name}`}</h3>
                 <h3>{`Email del usuario : ${user.email}`}</h3>
                 <h3>{`País del usuario : ${user.country}`}</h3>
+                <h3>{rent.driver_name && `Nombre del chofer : ${rent.driver_name}`}</h3>
                 </div>
 
                 </section>
