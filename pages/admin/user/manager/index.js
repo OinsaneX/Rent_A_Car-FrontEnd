@@ -157,7 +157,7 @@ export default function UserManager({users}) {
                 </section>
                 <hr />
                 <section>
-                    <h2>Coferes :</h2>
+                    <h2>Choferes :</h2>
                     <table>
                     <thead>
                     <tr>
