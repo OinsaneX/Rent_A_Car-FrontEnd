@@ -52,6 +52,13 @@ export default function AdminNav() {
             </Link>
             
             }
+           {user && user.role == "comercial" &&  <Link href="/admin/driverList">
+                <a className="link">
+                    Choferes
+                </a>
+            </Link>
+            
+            }
             <p onClick={() =>logout()}>Salir</p>
          
             
