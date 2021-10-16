@@ -82,11 +82,13 @@ export default function index() {
    {
     await axios.post("https://desolate-sea-14156.herokuapp.com/rent/searchDriversAvailable",rentData)
     .then(async(res)=>{
-      if(res.data){
-        console.log(res.data.name)
+      if(res.data._id){
         await axios.post("https://desolate-sea-14156.herokuapp.com/rent",{...rentData,driver_Id:res.data._id,driver_name:res.data.name})
         .then(response=> router.push(`/rent/available_cars/${response.data._id}`))
-        .catch(error=>setloading(false))
+        .catch(error=>{setloading(false)
+          NotificationManager.error("Error en la conexion",
+          "Error",
+          4000)})
       }
       else{
         NotificationManager.error("No hay choferes disponibles para esa fecha",
