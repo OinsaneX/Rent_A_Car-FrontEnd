@@ -30,29 +30,29 @@ export default function AdminNav() {
         <h2 className="title">Admin</h2>
 
        <div className="links">
-           {user && user.role=="admin" && <Link href="/admin/user/manager">
+           {user && user.role=="admin" && <Link href="/admin/user/manager" replace>
                 <a className="link">
                     Usuarios
                 </a>
             </Link> }
-           {user && user.role == "comercial" &&  <Link href="/admin/car_manager/">
+           {user && user.role == "comercial" &&  <Link href="/admin/car_manager/" replace>
                 <a className="link">
                     Autos
                 </a>
             </Link>}
-           {user && user.role == "comercial" &&     <Link href="/admin/rents">
+           {user && user.role == "comercial" &&     <Link href="/admin/rents" replace>
                 <a className="link">
                     Rentas
                 </a>
             </Link>}
-           {user && user.role == "comercial" &&  <Link href="/admin/workForm">
+           {user && user.role == "comercial" &&  <Link href="/admin/workForm" replace>
                 <a className="link">
-                    Formularios
+                    Formulários
                 </a>
             </Link>
             
             }
-           {user && user.role == "comercial" &&  <Link href="/admin/driverList">
+           {user && user.role == "comercial" &&  <Link href="/admin/driverList" replace>
                 <a className="link">
                     Choferes
                 </a>

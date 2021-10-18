@@ -21,9 +21,22 @@ export default function Home() {
 
 
   useEffect(() => {
-   getUser((res)=>{
-     res && router.replace("/rent")
-   })
+    getUser((response)=>{
+      if(response){
+        if(response.role == 'admin'){
+          router.replace('/admin/user/manager')
+        }
+        else if(response.role == 'comercial'){
+          router.replace('/admin/car_manager')
+  
+        }
+        else if(response.role == 'client' || response.role == 'driver'){
+          router.replace('/rent')
+  
+        }
+      }
+    })
+ 
     
   }, [])
 

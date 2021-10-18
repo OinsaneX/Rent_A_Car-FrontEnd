@@ -20,9 +20,23 @@ export default function index() {
   const [loading, setloading] = useState(false)
   const [carList, setcarList] = useState([])
   const [rentData, setrentData] = useState({location:null,pickUp:today,dropOff:today,pickHour:null,dropHour:null,driverReq:false,driver_Id:null,driver_name:null})
-  const {user} = useUser()
-
+ const {getUser} =  useUser()
   useEffect(() => {
+    getUser((response)=>{
+      if(response){
+        if(response.role == 'admin'){
+          router.replace('/admin/user/manager')
+        }
+        else if(response.role == 'comercial'){
+          router.replace('/admin/car_manager')
+  
+        }
+        else if(response.role == 'client' || response.role == 'driver'){
+          router.replace('/rent')
+  
+        }
+      }
+    })
     getCars()
   }, [])
 

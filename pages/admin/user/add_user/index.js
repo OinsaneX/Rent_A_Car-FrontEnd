@@ -72,12 +72,28 @@ export default function Add_User() {
         else {
             await axios.post("https://desolate-sea-14156.herokuapp.com/user",form)
             .then(response=>{
+              if(response.data.errUser){
+                NotificationManager.error(
+                  "Ya existe una cuenta con ese nombre de usuario",
+                  "Error",
+                  3000
+                )
+              }
+              else if(response.data.errIdentity){
+                NotificationManager.error(
+                  "Ya existe una cuenta con ese documento de identidad",
+                  "Error",
+                  3000
+                )
+              }
+              else{
               NotificationManager.success("Cuenta creada con éxito", "Sucesso", 2000);
               setTimeout(()=>{
                 router.replace("/admin/user/manager");
               },2000
                
               )
+            }
             })
          
          

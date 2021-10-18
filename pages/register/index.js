@@ -14,6 +14,7 @@ import {ValidateCI} from '../../utils/Validation'
 
 export default function Home() {
   const router = useRouter();
+  const [passConfirm, setpassConfirm] = useState(null)
   const [form, setform] = useState({
     name: "",
     username:"",
@@ -28,7 +29,6 @@ export default function Home() {
     pasport:""
   });
   const onSubmit = async(e) => {
-    console.log(form.pasport.includes("_"))
     e.preventDefault();
     if (form.name == "") {
       NotificationManager.error(
@@ -95,7 +95,6 @@ export default function Home() {
             )
           }
           else{
-            console.log(response.data._id)
             await axios.post("https://desolate-sea-14156.herokuapp.com/sendMail",{
               username: form.username,
               email:form.email,
@@ -141,9 +140,24 @@ export default function Home() {
   }
 
   const onChangeInput = (e) => {
-    console.log(e.target.value,e.target.name)
     setform({ ...form, [e.target.name]: e.target.value });
-  };
+
+    
+      if(e.target.name == "password"){
+        
+        form.conf == e.target.value && setpassConfirm(1)
+        form.conf != e.target.value && setpassConfirm(2)
+        form.conf.length == 0 && e.target.value == "" && setpassConfirm(null)
+      }    
+      else if(e.target.name == "conf"){
+        form.password == e.target.value && setpassConfirm(1)
+        form.password != e.target.value && setpassConfirm(2)
+        form.password.length == 0 && e.target.value == "" && setpassConfirm(null)
+
+      }
+    
+
+  }
   return (
     <>
       <div>
@@ -205,7 +219,7 @@ export default function Home() {
             </section>
             <section>
               <p>Confirmar :</p>
-              <input
+              <input className="passConf"
                 name="conf"
                 value={form.conf}
                 onChange={(e) => onChangeInput(e)}
@@ -334,6 +348,12 @@ export default function Home() {
         input[type="number"] {
           -moz-appearance: textfield;
         }
+
+.passConf{
+  ${passConfirm == 1 && 'box-shadow: 0px 0px 12px #1CFE37;'};
+  ${passConfirm == 2 && 'box-shadow: 0px 0px 12px #FE1C1C;'}
+}
+
       `}</style>
     </>
   );

@@ -10,7 +10,8 @@ import {
 } from "react-notifications";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
+import Link from 'next/link'
+import NavBar from '../../components/NavBar';
 export default function Profile() {
     const router = useRouter();
     const [user, setUser] = useState(null)
@@ -66,6 +67,7 @@ export default function Profile() {
 
     return (
         <>
+        <NavBar/>
         <NotificationContainer />
         <header>
            <div className="imgUser">
@@ -132,32 +134,12 @@ export default function Profile() {
 
 
         {user && user.role=="driver" && <main>
-        <h2>
-                Tus trabajos pendientes : 
-            </h2>
-            <section>
-                {works.map((work)=>(
-                   <div className="card">
-                       <div className="info">
-                   <div className="col">
-                <h3>{`Precio total : ${work.price} $`}</h3>
-                <h3>{`Dias de reserva : ${work.days} `}</h3>
-
-                </div>
-                <div className="col">
-                <h3>{`Lugar de recogida : ${work.location}`}</h3>
-                <h3>{`Fecha de recogida : ${new Date(work.pickUp).getDate()}/${new Date(work.pickUp).getMonth()+1}/${new Date(work.pickUp).getFullYear()} a las ${work.pickHour} ${work.pickHour < 12 ? 'AM' : 'PM'}`}</h3>
-                <h3>{`Fecha de entrega : ${new Date(work.dropOff).getDate()}/${new Date(work.dropOff).getMonth()+1}/${new Date(work.dropOff).getFullYear()} a las ${work.dropHour} ${work.dropHour < 12 ? 'AM' : 'PM'}`}</h3>
-                </div>
-                <div className="col flex1">
-                <h3>{`Cliente : ${user.name}`}</h3>
-                <h3>{`La renta ${!work.confirmed ? "no" : ""} ha sido confirmada`}</h3>
-                </div>
-
-                   </div>
-                        </div>
-                ))}
-            </section>
+      
+               <section>
+              <Link href="/profile/myWork">
+              <a > <h3>Ver mis Trabajos</h3> </a>
+              </Link>
+               </section>
             </main>}
            
           <style jsx>
@@ -221,6 +203,20 @@ export default function Profile() {
                   align-content: center;
                   align-items: center;
 
+              }
+              a {
+                padding: 14px 20px;
+                color:#fff;
+                background-color: #000;
+                border: none;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0,.8);
+      
+                border-radius: 5px;
+                margin-top: 20px;
+                transition: all ease-in 0.7s;
+              }
+              a:hover {
+                background-color: #0009;
               }
               .info{
                   display:flex;
