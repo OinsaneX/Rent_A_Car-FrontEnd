@@ -66,7 +66,6 @@ export default function Add_Car() {
 
       <AdminNav />
       <main>
-        <header></header>
         <section>
           {listCar.map((car) => (
             <div key={car._id} className="card">
@@ -167,7 +166,7 @@ export default function Add_Car() {
             place-content: center;
             place-items: center;
           }
-        `}{" "}
+        `}
       </style>
     </div>
   );
