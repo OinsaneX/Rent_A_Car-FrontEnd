@@ -85,7 +85,7 @@ export default function Profile() {
             <h3>Email : {user.email}</h3>
             <h3>Nacionalidad : {user.nacionality}</h3>
             <h3>Nombre : {user.name}</h3>
-            <h3>Rol : {user.role == "driver" ? "Chofer" : user.role}</h3>
+
             <h3>País : {user.country}</h3>
             <h3>Teléfono : {user.phone}</h3>
           </div>
