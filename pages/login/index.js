@@ -2,16 +2,16 @@ import Link from "next/link";
 import "react-notifications/lib/notifications.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import LoginImage from '../../svgs/img/Login'
+import LoginImage from "../../svgs/img/Login";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
 import axios from "axios";
-import {useUser} from '../../hooks/UserContext'
+import { useUser } from "../../hooks/UserContext";
 
 export default function Home() {
-  const {user,getUser} = useUser();
+  const { user, getUser } = useUser();
   const router = useRouter();
   const [form, setform] = useState({
     username: "",
@@ -19,26 +19,19 @@ export default function Home() {
   });
   const [loading, setloading] = useState(false);
 
-
   useEffect(() => {
-    getUser((response)=>{
-      if(response){
-        if(response.role == 'admin'){
-          router.replace('/admin/user/manager')
-        }
-        else if(response.role == 'comercial'){
-          router.replace('/admin/car_manager')
-  
-        }
-        else if(response.role == 'client' || response.role == 'driver'){
-          router.replace('/rent')
-  
+    getUser((response) => {
+      if (response) {
+        if (response.role == "admin") {
+          router.replace("/admin/user/manager");
+        } else if (response.role == "comercial") {
+          router.replace("/admin/car_manager");
+        } else if (response.role == "client" || response.role == "driver") {
+          router.replace("/rent");
         }
       }
-    })
- 
-    
-  }, [])
+    });
+  }, []);
 
   const onChangeInput = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
@@ -55,35 +48,37 @@ export default function Home() {
       NotificationManager.error("Introduzca la contrasenha", "Error", 3000);
     } else {
       setloading(true);
-        await axios.post("https://desolate-sea-14156.herokuapp.com/user/login",form)
-        .then(async response => {
-          if(response.data){
-            if(!response.data.confirmed){
+      await axios
+        .post("https://desolate-sea-14156.herokuapp.com/user/login", form)
+        .then(async (response) => {
+          if (response.data) {
+            if (!response.data.confirmed) {
               NotificationManager.warning(
                 "Su cuenta no está confirmada",
                 "Error",
                 3000
               );
               setloading(false);
-            }else{
-              await axios.post("https://desolate-sea-14156.herokuapp.com/userlogged",response.data)
-              .then(res => {
-                localStorage.setItem("token",res.data.token)
-                if(response.data.role=="admin"){
-                  router.replace("/admin/user/manager");
-                }
-                else if(response.data.role=="comercial"){
-                  router.replace("/admin/car_manager");
-                }
-                else{
-                  router.replace("/rent");
-  
-                }
-              })
+            } else {
+              await axios
+                .post(
+                  "https://desolate-sea-14156.herokuapp.com/userlogged",
+                  response.data
+                )
+                .then((res) => {
+                  localStorage.setItem("token", res.data.token);
+                  if (response.data.role == "admin") {
+                    router.replace("/admin/user/manager");
+                  } else if (response.data.role == "comercial") {
+                    router.replace("/admin/car_manager");
+                  } else if (response.data.role == "driver") {
+                    router.replace("/profile");
+                  } else {
+                    router.replace("/rent");
+                  }
+                });
             }
-           
-          }
-          else{
+          } else {
             setloading(false);
 
             NotificationManager.error(
@@ -92,19 +87,17 @@ export default function Home() {
               3000
             );
           }
-        })
-
-       
+        });
     }
-  }
-  
+  };
+
   return (
     <>
       <div>
         <main>
           <NotificationContainer />
           <h2>Login</h2>
-          <LoginImage/>
+          <LoginImage />
           <section>
             <input
               type="text"
@@ -136,13 +129,13 @@ export default function Home() {
           display: grid;
           place-content: center;
           place-items: center;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0,.8);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
           padding: 20px;
         }
         a {
           margin-top: 10px;
           color: #000;
-          border-bottom:2px solid #eee;
+          border-bottom: 2px solid #eee;
         }
         .spinner {
           margin-top: 5px;
@@ -174,8 +167,7 @@ export default function Home() {
         h2 {
           font-style: italic;
           margin-bottom: 20px;
-          text-shadow: 0px 0px 2px rgba(0, 0, 0,1);
-
+          text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
         }
         section {
           display: flex;
@@ -187,14 +179,14 @@ export default function Home() {
         input {
           margin-top: 15px;
           padding: 10px 20px;
-          box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
+          box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
         }
         button {
           padding: 14px 20px;
-          color:#fff;
+          color: #fff;
           background-color: #000;
           border: none;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0,.8);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
 
           border-radius: 5px;
           margin-top: 20px;

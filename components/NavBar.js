@@ -1,162 +1,192 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import User from '../svgs/icons/User'
-import {useUser} from '../hooks/UserContext'
+import User from "../svgs/icons/User";
+import { useUser } from "../hooks/UserContext";
 import router from "next/router";
 import axios from "axios";
 export default function NavBar() {
-
-  const [despl, setdespl] = useState(false)
-  const [user, setUser] = useState(null)
-  const {getUser} = useUser()
+  const [despl, setdespl] = useState(false);
+  const [user, setUser] = useState(null);
+  const { getUser } = useUser();
 
   useEffect(() => {
-    getUser((res)=>{
-      setUser(res)
-    })
-  }, [])
+    getUser((res) => {
+      setUser(res);
+    });
+  }, []);
 
+  const changeDespl = () => {
+    setdespl(!despl);
+  };
 
-  const changeDespl = ()=>{
-    setdespl(!despl)
-  }
+  const logout = async () => {
+    await axios.delete(
+      `https://desolate-sea-14156.herokuapp.com/userlogged/${user._id}`
+    );
+    localStorage.removeItem("token");
+    router.replace("/");
+  };
 
-  const logout = async()=>{
-    await axios.delete(`https://desolate-sea-14156.herokuapp.com/userlogged/${user._id}`)
-    localStorage.removeItem("token")
-    router.replace("/")
-  }
+  return (
+    <nav>
+      <section>
+        <h3> Rent_A_Car</h3>
+      </section>
+      <section>
+        {(user && user.role !== "driver") ||
+          (!user && (
+            <Link href="/rent" replace>
+              <a className="margin">Rentar</a>
+            </Link>
+          ))}
+        <div className="center" onClick={() => changeDespl()}>
+          <User />
 
+          <p id="useraccount" className="cont">
+            Mi cuenta
+          </p>
+        </div>
 
-    return (
-        <nav>
-        <section>
-          <h3> Rent_A_Car</h3>
-        </section>
-        <section>
-        
-         {(user && user.role !== "driver")|| !user  &&  <Link href="/rent" replace>
-            <a className="margin" >Rentar</a>
-          </Link>}
-          <div className="center" onClick={()=>changeDespl()}>
-         
-            <User/>
-         
-          
-            <p id="useraccount" className="cont" >Mi cuenta</p>
-          </div>
-          
-          {
-            despl && !user ?  <ul>
-						<li><Link href="/login" replace><a>Login</a></Link></li>
-						<li><Link href="/register" replace><a>Registro</a></Link></li>
-						<li><Link href="/services" replace><a>Servicios</a></Link></li>
-            
-							</ul>
-              :  
-              despl && user &&  <ul>
-              <li><Link href="/profile" replace><a>Perfil</a></Link></li>
-              <li><Link href="/services" replace><a>Servicios</a></Link></li>
+        {despl && !user ? (
+          <ul>
+            <li>
+              <Link href="/login" replace>
+                <a>Login</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/register" replace>
+                <a>Registro</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" replace>
+                <a>Servicios</a>
+              </Link>
+            </li>
+          </ul>
+        ) : (
+          despl &&
+          user && (
+            <ul>
+              <li>
+                <Link href="/profile" replace>
+                  <a>Perfil</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" replace>
+                  <a>Servicios</a>
+                </Link>
+              </li>
 
-              {user.role=="admin" && <li><Link href="/admin/user/manager" replace><a>Administración</a></Link></li>}
-              {user.role=="comercial" && <li><Link href="/admin/car_manager" replace><a>Comercial</a></Link></li>}
-              <li onClick={()=>logout()}>Salir</li>
-                </ul>
-          }
-        
-         
-        </section>
+              {user.role == "admin" && (
+                <li>
+                  <Link href="/admin/user/manager" replace>
+                    <a>Administración</a>
+                  </Link>
+                </li>
+              )}
+              {user.role == "comercial" && (
+                <li>
+                  <Link href="/admin/car_manager" replace>
+                    <a>Comercial</a>
+                  </Link>
+                </li>
+              )}
+              <li onClick={() => logout()}>Salir</li>
+            </ul>
+          )
+        )}
+      </section>
 
-        <style jsx>
+      <style jsx>
         {`
-        img{
-            border-radius:999px;
-        }
-        ul {
-          display:block;
-          position:absolute;
-          min-width:140px;
-          background-color:#000;
-          padding:10px 25px;
-          right:0px;
-          top:85px;
-          margin:0;
-          margin-right:5px;
-          box-shadow: 0px 0px 5px rgba(0, 0, 0,1);
-          list-style:none;
-        }
-       
-     
-        
-        h3{
-          margin-left:10px;
-            color:#fff;
-            font-style:italic;
-            cursor:default;
-            text-shadow: 0px 0px 5px rgba(255, 255, 255,1);
+          img {
+            border-radius: 999px;
+          }
+          ul {
+            display: block;
+            position: absolute;
+            min-width: 140px;
+            background-color: #000;
+            padding: 10px 25px;
+            right: 0px;
+            top: 85px;
+            margin: 0;
+            margin-right: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+            list-style: none;
+          }
 
-        }
-        li{
-          margin: 0px 15px;
-          font-size: 20px;
-          font-style: italic;
-          color:#fff;
-          transition:all ease-in 0.7s;
-          cursor:pointer;
-        }
-        li:hover{
-          text-decoration:underline;
-      }
+          h3 {
+            margin-left: 10px;
+            color: #fff;
+            font-style: italic;
+            cursor: default;
+            text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+          }
+          li {
+            margin: 0px 15px;
+            font-size: 20px;
+            font-style: italic;
+            color: #fff;
+            transition: all ease-in 0.7s;
+            cursor: pointer;
+          }
+          li:hover {
+            text-decoration: underline;
+          }
           nav {
-            box-shadow: 0px 0px 18px rgba(0, 0, 0,.6);
-            overflow:hidden;
+            box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
             background-color: #000;
             height: 80px;
             display: flex;
             justify-content: space-between;
           }
-          .cont{
-            margin:0;
-            margin-right:10px;
+          .cont {
+            margin: 0;
+            margin-right: 10px;
             font-size: 20px;
             font-style: italic;
-            color:#fff;
+            color: #fff;
           }
-          .cont:hover{
-            text-decoration:underline;
-        }
+          .cont:hover {
+            text-decoration: underline;
+          }
           a {
             font-size: 20px;
             font-style: italic;
-            color:#fff;
-            transition:all ease-in 0.7s;
+            color: #fff;
+            transition: all ease-in 0.7s;
           }
-          a:hover{
-              text-decoration:underline;
+          a:hover {
+            text-decoration: underline;
           }
-          .center{
+          .center {
             display: flex;
             align-items: center;
           }
           section {
             display: flex;
             align-items: center;
-            
           }
-          p{
-            display:none;
-            cursor:default;
+          p {
+            display: none;
+            cursor: default;
           }
-          .margin{
-            margin:0 15px;
+          .margin {
+            margin: 0 15px;
           }
 
           @media only screen and (min-width: 1000px) {
-            p{
-display:inline}
+            p {
+              display: inline;
+            }
           }
-          `}
-        </style>
-      </nav>
-    );
+        `}
+      </style>
+    </nav>
+  );
 }
