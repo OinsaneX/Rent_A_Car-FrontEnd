@@ -83,7 +83,7 @@ export default function UserManager({ users }) {
                   <p>CI</p>
                 </th>
                 <th>
-                  <p>Pais</p>
+                  <p>País</p>
                 </th>
                 <th>
                   <p>Opciones</p>
@@ -108,7 +108,7 @@ export default function UserManager({ users }) {
                       <td data-col-title="CI">
                         <p>{user.identity}</p>
                       </td>
-                      <td data-col-title="Pais">
+                      <td data-col-title="País">
                         <p>{user.country}</p>
                       </td>
                       <td data-col-title="Opciones" className="flex">
@@ -147,7 +147,7 @@ export default function UserManager({ users }) {
                   <p>CI</p>
                 </th>
                 <th>
-                  <p>Pais</p>
+                  <p>País</p>
                 </th>
                 <th>
                   <p>Opciones</p>
@@ -171,7 +171,7 @@ export default function UserManager({ users }) {
                       <td data-col-title="CI">
                         <p>{user.identity}</p>
                       </td>
-                      <td data-col-title="Pais">
+                      <td data-col-title="País">
                         <p>{user.country}</p>
                       </td>
                       <td data-col-title="Opciones" className="flex">
@@ -209,7 +209,7 @@ export default function UserManager({ users }) {
                   <p>CI</p>
                 </th>
                 <th>
-                  <p>Pais</p>
+                  <p>País</p>
                 </th>
                 <th>
                   <p>Opciones</p>
@@ -233,7 +233,7 @@ export default function UserManager({ users }) {
                       <td data-col-title="CI">
                         <p>{user.identity}</p>
                       </td>
-                      <td data-col-title="Pais">
+                      <td data-col-title="País">
                         <p>{user.country}</p>
                       </td>
                       <td data-col-title="Opciones" className="flex">
@@ -271,7 +271,7 @@ export default function UserManager({ users }) {
                   <p>CI</p>
                 </th>
                 <th>
-                  <p>Pais</p>
+                  <p>País</p>
                 </th>
                 <th>
                   <p>Opciones</p>
@@ -295,7 +295,7 @@ export default function UserManager({ users }) {
                       <td data-col-title="CI">
                         <p>{user.identity}</p>
                       </td>
-                      <td data-col-title="Pais">
+                      <td data-col-title="País">
                         <p>{user.country}</p>
                       </td>
                       <td data-col-title="Opciones" className="flex">

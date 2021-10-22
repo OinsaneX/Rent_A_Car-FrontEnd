@@ -26,7 +26,7 @@ export default function AdminNav() {
 
   return (
     <nav>
-      <h2 className="title">Admin</h2>
+      <h2 className="title">Rent_A_Car</h2>
 
       {user && user.role == "comercial" && (
         <label className="sub" onClick={() => setdesp(!desp)}>
@@ -53,7 +53,7 @@ export default function AdminNav() {
         )}
         {user && user.role == "comercial" && (
           <Link href="/admin/workForm" replace>
-            <a className="link com">Formulários</a>
+            <a className="link com">Formularios</a>
           </Link>
         )}
         {user && user.role == "comercial" && (

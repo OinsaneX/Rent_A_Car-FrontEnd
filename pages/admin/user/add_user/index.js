@@ -22,7 +22,7 @@ export default function Add_User() {
     password: "",
     conf: "",
     address: "",
-    country: "",
+    country: "Cuba",
     role: "",
   });
 
@@ -105,7 +105,7 @@ export default function Add_User() {
       <div>
         <main>
           <NotificationContainer />
-          <h2>Nuevo Administrador</h2>
+          <h2>Nuevo usuario</h2>
           <form>
             <section>
               <p>Nombre :</p>
@@ -178,16 +178,6 @@ export default function Add_User() {
               />
             </section>
 
-            <section>
-              <p>Pais :</p>
-              <input
-                name="country"
-                value={form.country}
-                onChange={(e) => onChangeInput(e)}
-                type="text"
-                placeholder="Pais"
-              />
-            </section>
             <section>
               <p>Rol :</p>
               <select

@@ -69,11 +69,20 @@ export default function NavBar() {
           despl &&
           user && (
             <ul>
-              <li>
-                <Link href="/profile" replace>
-                  <a>Perfil</a>
-                </Link>
-              </li>
+              {user.role == "driver" && (
+                <li>
+                  <Link href="/profile" replace>
+                    <a>Perfil</a>
+                  </Link>
+                </li>
+              )}
+              {user.role == "client" && (
+                <li>
+                  <Link href="/profile" replace>
+                    <a>Mis reservas</a>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link href="/services" replace>
                   <a>Servicios</a>
