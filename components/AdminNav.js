@@ -57,6 +57,11 @@ export default function AdminNav() {
           </Link>
         )}
         {user && user.role == "comercial" && (
+          <Link href="/admin/reports/rentXmonth" replace>
+            <a className="link com">Reportes</a>
+          </Link>
+        )}
+        {user && user.role == "comercial" && (
           <Link href="/admin/driverList" replace>
             <a className="link com">Choferes</a>
           </Link>
@@ -77,6 +82,11 @@ export default function AdminNav() {
             {user && user.role == "comercial" && (
               <Link href="/admin/workForm" replace>
                 <a className="link">Formularios</a>
+              </Link>
+            )}
+            {user && user.role == "comercial" && (
+              <Link href="/admin/reports/rentXmonth" replace>
+                <a className="link">Reportes</a>
               </Link>
             )}
             {user && user.role == "comercial" && (

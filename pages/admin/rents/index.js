@@ -55,6 +55,9 @@ export default function Rents() {
                   <div className="col">
                     <h3>{`Precio total : ${rent.price} $`}</h3>
                     <h3>{`Días de reserva : ${rent.days} `}</h3>
+                    {rent.driver_name && (
+                      <h3>{`Chofer : ${rent.driver_name} `}</h3>
+                    )}
                   </div>
                   <div className="col">
                     <h3>{`Lugar de recogida : ${rent.location}`}</h3>
