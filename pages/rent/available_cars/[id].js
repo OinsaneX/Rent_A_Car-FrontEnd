@@ -150,7 +150,7 @@ export default function AvailableCars({ listCar, data }) {
               position: absolute;
             }
           }
-        `}{" "}
+        `}
       </style>
     </>
   );
