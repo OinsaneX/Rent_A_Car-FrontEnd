@@ -123,7 +123,7 @@ export default function MyWork() {
             align-content: center;
             align-items: center;
           }
-        `}{" "}
+        `}
       </style>
     </main>
   );
