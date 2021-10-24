@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import "react-notifications/lib/notifications.css";
 import InputMask from "react-input-mask";
-
+import { useRouter } from "next/router";
 import {
   NotificationManager,
   NotificationContainer,
@@ -23,6 +23,7 @@ export default function AddCar() {
     air: null,
   });
   const [loading, setloading] = useState(null);
+  const router = useRouter();
 
   const onWrite = (e) => {
     setcarData({ ...carData, [e.target.name]: e.target.value });
@@ -90,6 +91,9 @@ export default function AddCar() {
               "Éxito",
               2000
             );
+            setTimeout(() => {
+              router.replace("/admin/car_manager");
+            }, 2000);
           }
         })
         .catch((error) => {
@@ -128,11 +132,11 @@ export default function AddCar() {
               placeholder="Modelo"
             />
             <InputMask
-              mask="a999999"
+              mask="T999999"
               name="registration"
               value={carData.registration}
               onChange={(e) => onWrite(e)}
-              placeholder="Matrícula"
+              placeholder="T999999"
             />
             <h4>Descripción :</h4>
             <div className="txtarea">
