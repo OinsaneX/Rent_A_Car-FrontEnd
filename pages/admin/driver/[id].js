@@ -57,7 +57,7 @@ export default function Profile({ works, user }) {
                   } ${work.dropHour < 12 ? "AM" : "PM"}`}</h3>
                 </div>
                 <div className="col flex1">
-                  <h3>{`Cliente : ${user.name}`}</h3>
+                  <h3>{`Cliente : ${work.user_name}`}</h3>
                   <h3>{`La renta ${
                     !work.confirmed ? "no" : ""
                   } ha sido confirmada`}</h3>
