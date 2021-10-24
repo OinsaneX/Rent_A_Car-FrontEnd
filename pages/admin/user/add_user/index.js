@@ -12,6 +12,8 @@ import { ValidateCI } from "../../../../utils/Validation";
 
 export default function Add_User() {
   const router = useRouter();
+  const [passConfirm, setpassConfirm] = useState(null);
+
   const [form, setform] = useState({
     name: "",
     username: "",
@@ -28,6 +30,16 @@ export default function Add_User() {
 
   const onChangeInput = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
+
+    if (e.target.name == "password") {
+      form.conf == e.target.value && setpassConfirm(1);
+      form.conf != e.target.value && setpassConfirm(2);
+      form.conf.length == 0 && e.target.value == "" && setpassConfirm(null);
+    } else if (e.target.name == "conf") {
+      form.password == e.target.value && setpassConfirm(1);
+      form.password != e.target.value && setpassConfirm(2);
+      form.password.length == 0 && e.target.value == "" && setpassConfirm(null);
+    }
   };
 
   const onSubmit = async (e) => {
@@ -170,6 +182,7 @@ export default function Add_User() {
             <section>
               <p>Confirmar :</p>
               <input
+                className="passConf"
                 name="conf"
                 value={form.conf}
                 onChange={(e) => onChangeInput(e)}
@@ -277,6 +290,10 @@ export default function Add_User() {
 
         input[type="number"] {
           -moz-appearance: textfield;
+        }
+        .passConf {
+          ${passConfirm == 1 && "box-shadow: 0px 0px 12px #1CFE37;"};
+          ${passConfirm == 2 && "box-shadow: 0px 0px 12px #FE1C1C;"}
         }
       `}</style>
     </>

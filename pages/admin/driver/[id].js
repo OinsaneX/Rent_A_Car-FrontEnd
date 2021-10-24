@@ -43,14 +43,14 @@ export default function Profile({ works, user }) {
                   <h3>{`Lugar de recogida : ${work.location}`}</h3>
                   <h3>{`Fecha de recogida : ${new Date(
                     work.pickUp
-                  ).getDate()}/${
+                  ).getUTCDate()}/${
                     new Date(work.pickUp).getMonth() + 1
                   }/${new Date(work.pickUp).getFullYear()} a las ${
                     work.pickHour
                   } ${work.pickHour < 12 ? "AM" : "PM"}`}</h3>
                   <h3>{`Fecha de entrega : ${new Date(
                     work.dropOff
-                  ).getDate()}/${
+                  ).getUTCDate()}/${
                     new Date(work.dropOff).getMonth() + 1
                   }/${new Date(work.dropOff).getFullYear()} a las ${
                     work.dropHour

@@ -71,7 +71,7 @@ export default function Add_Car() {
             <div key={car._id} className="card">
               <h3>{`${car.brand} ${car.model}`}</h3>
               <img src={car.imageUrl} alt="" />
-              <span>{car.price_per_day} $ Por dia</span>
+              <span>{car.price_per_day} $ Por día</span>
               <div className="buttons">
                 <Link href={`/admin/car_manager/add_car/${car._id}`}>
                   <button>

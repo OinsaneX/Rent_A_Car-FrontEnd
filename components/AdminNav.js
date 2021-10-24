@@ -76,7 +76,7 @@ export default function AdminNav() {
             )}
             {user && user.role == "comercial" && (
               <Link href="/admin/workForm" replace>
-                <a className="link">Formulários</a>
+                <a className="link">Formularios</a>
               </Link>
             )}
             {user && user.role == "comercial" && (
@@ -120,6 +120,7 @@ export default function AdminNav() {
             margin-right: 5px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
             list-style: none;
+            z-index: 10;
           }
 
           .com {

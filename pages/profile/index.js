@@ -114,12 +114,12 @@ export default function Profile() {
                         <h3>{`Lugar de recogida : ${rent.location}`}</h3>
                         <h3>{`Fecha de recogida : ${new Date(
                           rent.pickUp
-                        ).getDate()}/${
+                        ).getUTCDate()}/${
                           new Date(rent.pickUp).getMonth() + 1
                         }/${new Date(rent.pickUp).getFullYear()}`}</h3>
                         <h3>{`Fecha de entrega : ${new Date(
                           rent.dropOff
-                        ).getDate()}/${
+                        ).getUTCDate()}/${
                           new Date(rent.dropOff).getMonth() + 1
                         }/${new Date(rent.dropOff).getFullYear()}`}</h3>
                       </div>

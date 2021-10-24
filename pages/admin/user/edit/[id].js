@@ -108,7 +108,7 @@ export default function Add_User({ user }) {
       <div>
         <main>
           <NotificationContainer />
-          <h2>Nuevo Administrador</h2>
+          <h2>Editar Usuario</h2>
           <form>
             <section>
               <p>Nombre :</p>
