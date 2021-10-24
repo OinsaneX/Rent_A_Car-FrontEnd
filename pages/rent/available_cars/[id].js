@@ -2,7 +2,6 @@ import axios from "axios";
 import BackIcon from "../../../svgs/icons/Back";
 import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import RegisterPage from "../../../components/RegisterPage";
 import { useUser } from "../../../hooks/UserContext";
 export default function AvailableCars({ listCar, data }) {
   const router = useRouter();
@@ -41,10 +40,6 @@ export default function AvailableCars({ listCar, data }) {
         <BackIcon />
         <p>Cancelar</p>
       </header>
-
-      <div className="log">
-        <RegisterPage close={close} />
-      </div>
 
       <div className="grid">
         <h3>{`Autos disponibles para ser recogidos en ${
@@ -103,9 +98,6 @@ export default function AvailableCars({ listCar, data }) {
           }
           .btn {
             text-align: center;
-          }
-          .log {
-            display: ${!logged ? "none" : "block"};
           }
 
           section {
